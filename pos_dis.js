@@ -5,7 +5,7 @@ var lat1;
 var lat2 = 49.224217;
 var lon1;
 var lon2 = 8.785972;
-
+//works
 function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -14,14 +14,14 @@ function getLocation() {
       x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
-        
+//works      
 function showPosition(position) {
     x.innerHTML = "Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude;
     lat1 = position.coords.latitude;
     lon1 = position.coords.longitude;
 }
-
+//works - precision ~ 10m
 function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
     var R = 6378.137; // Radius of earth in KM
     var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
@@ -36,10 +36,9 @@ function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement fun
     return result; // meters
 }
 
+// checks all POI and selects nearest as active -> every 30 sek
 function nearestPOI(){
 
 }
 
-function nextPOI(){
-    
-}
+
