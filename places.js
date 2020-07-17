@@ -18,8 +18,6 @@ var x = function staticLoadPlaces() {
         },
     ];
 }
-places.forEach((x) => {
-    console.log(x.name);
-})
+
 
 }
