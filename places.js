@@ -1,5 +1,4 @@
 window.onload = () => {
-var placesTxt = document.getElementById("places");
 
 var x = function staticLoadPlaces() {
     return [
@@ -19,5 +18,5 @@ var x = function staticLoadPlaces() {
         },
     ];
 }
-
+console.log(x);
 }

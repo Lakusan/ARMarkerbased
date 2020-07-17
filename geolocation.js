@@ -9,7 +9,7 @@ var lon2 = 8.785972;
 function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
-      navigator.geolocation.getCurrentPosition(getDistance);     
+      getDistance(lat1, lon1, lat2, lon2);     
     } else { 
       x.innerHTML = "Geolocation is not supported by this browser.";
     }
