@@ -1,0 +1,1 @@
+document.querySelector("#ent1").icon.setAttribute('gltf-model', "#sign");
