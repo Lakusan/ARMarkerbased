@@ -22,6 +22,6 @@ var placesTxt = document.getElementById("places");
             }
         ];
     }
-placesTxt.innerHTML = "Places: " + staticPlaces;
 }
 
+placesTxt.innerHTML = "Places: " + staticPlaces;
