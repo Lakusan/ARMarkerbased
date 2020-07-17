@@ -1,27 +1,23 @@
 window.onload = () => {
 var placesTxt = document.getElementById("places");
 
-
- var staicPlaces = function staticLoadPlaces() {
-
-        return [
-            {
-                "POI_1": {
-                    "Position": {
-                        "Longitude": 9.96233,
-                        "Latitude": 49.80404
-                    }
-                },
-
-                "POI_2": {
-                    "Position": {
-                        "Longitude": 9.96233,
-                        "Latitude": 49.80404
-                    }
-                }
+var x = function staticLoadPlaces() {
+    return [
+        {
+            name: "One",
+            location: {
+                lat: 49.80404, // change here latitude if using static data
+                lng: 9.96233, // change here longitude if using static data
             }
-        ];
-    }
+        },
+        {
+            name: "Two",
+            location: {
+                lat: 49.80404, // change here latitude if using static data
+                lng: 9.96233, // change here longitude if using static data
+            }
+        },
+    ];
 }
-
-placesTxt.innerHTML = "Places: " + staticPlaces;
+placesTxt.innerHTML="place: " + x;
+}
