@@ -9,7 +9,7 @@ var lon2 = 8.785972;
 function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
-      // measure(lat1, lon1, lat2, lon2);
+      navigator.geolocation.getCurrentPosition(getDistance);     
     } else { 
       x.innerHTML = "Geolocation is not supported by this browser.";
     }
@@ -22,7 +22,7 @@ function showPosition(position) {
     lon1 = position.coords.longitude;
 }
 //works - precision ~ 10m
-function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+function getDistance(lat1, lon1, lat2, lon2){  // generally used geo measurement function
     var R = 6378.137; // Radius of earth in KM
     var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
     var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
