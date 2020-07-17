@@ -36,16 +36,24 @@
 	<br/>
 	Contact me any time at <a href='https://twitter.com/nicolocarp' target='_blank'>@nicolocarp</a>
 </div>
-	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' renderer='precision: medium;'>
-		<!-- handle hiro marker -->
+<script src="events.js"></script>    
+
+<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' renderer='precision: medium;'>
+    <a-assets>
+        <a-asset-item id="flower1" src="assets/flower-1/scene.gltf"></a-asset-item>
+        <a-asset-item id="sign" src="assets/dwyl-info-sign-1/scene.gltf"></a-asset-item>
+    </a-assets>    
+    
+    <!-- handle hiro marker -->
 		<!-- 'registerevents' will register event listeners for the marker when it is found and lost,
 		as defined in the inline script above -->
 		<a-marker preset='hiro' id='marker-hiro' registerevents>
 			<a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:blue;'>
-				<a-entity
+                <a-entity
+                id="entity1"
           position="0 0 0"
           scale="0.05 0.05 0.05"
-          gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+          gltf-model="#flower1"
         ></a-entity>
 			</a-box>
 		</a-marker>
