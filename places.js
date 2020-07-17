@@ -19,5 +19,5 @@ var x = function staticLoadPlaces() {
         },
     ];
 }
-placesTxt.innerHTML="place: " + x;
+
 }
