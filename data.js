@@ -1,6 +1,6 @@
 window.onload = () => {
 
-var x = function staticLoadPlaces() {
+var data = function staticLoadPlaces() {
     return [
         {
             name: "One",
