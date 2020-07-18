@@ -6,7 +6,7 @@
   var lon1;
   var lon2 = 8.785972;
   
-  console.log(x,y,z, lat1, lat2, lon1, lon2);
+  // console.log(x,y,z, lat1, lat2, lon1, lon2);
 
   var data = [{
     "name": "One",
@@ -28,32 +28,31 @@
 
 window.onload = () => {
 
-  console.log("Using: geolocation.js");
-  
   setInterval(getLocation, 1000);
-  setInterval(getDistance, 1000);
-  setInterval(intervall, 1000);
+  
+  
+  setInterval(dist, 1000);
+  // const arr = [];
+  // const min = arr.reduce((a,b) => Math.min(a,b));
+
    
  
   };
 
-function intervall() {
-//  var i;
-//   for (i in data.name) {
-//     z += data.name[i];
-    // }
-    console.log("Intervall");
-    console.log(data);
-    for (var i in data){
-      
-      if ((getDistance(lat1, lon1, data[i].lat, data[i].lng)) > 3){
-
-      } else {
-        z.innerHTML=("Nearest Place: " + data[i].location);
-        }
+function dist() {
+  const arr = [];
+   
     
-    }
-
+  for (var i in data){
+    var dist = getDistance(lat1, lon1, data[i].lat, data[i].lng);
+    // console.log("Distance to " + data[i].location + " " + dist)
+    arr[i] = dist;
+    // console.log("array in for: " + arr[i])
+  };
+   console.log("Array: " + arr)
+  const min = arr.reduce((a,b) => Math.min(a,b));
+  console.log("Smallest Number in Array: " + min);
+  z.innerHTML= "Nächster Punkt in " + min + " Metern" ;
 };
 
 
@@ -65,7 +64,7 @@ function getLocation() {
       navigator.geolocation.getCurrentPosition(showPosition);
     } else { 
       x.innerHTML = "Geolocation is not supported by this browser.";
-      console.log("Geolocation not present");
+      
     }
 }
 //works      
@@ -74,7 +73,7 @@ function showPosition(position) {
     "<br>Longitude: " + position.coords.longitude;
     lat1 = position.coords.latitude;
     lon1 = position.coords.longitude;
-    console.log("Own Position set");
+   
     getDistance(lat1, lon1, lat2, lon2);
 }
 //works - precision ~ 10m
@@ -89,7 +88,7 @@ function getDistance(lat1, lon1, lat2, lon2){  // generally used geo measurement
     var d = R * c;
     var result = d *1000
     
-    console.log("Distance to nearest Object");
+   
     return result; // meters
 }
 
