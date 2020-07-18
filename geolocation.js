@@ -33,6 +33,7 @@ window.onload = () => {
   setInterval(getLocation, 1000);
   setInterval(getDistance, 1000);
   setInterval(intervall, 1000);
+   
  
   };
 
@@ -44,7 +45,13 @@ function intervall() {
     console.log("Intervall");
     console.log(data);
     for (var i in data){
-    console.log(data[i].name);
+      
+      if ((getDistance(lat1, lon1, data[i].lat, data[i].lng)) > 10){
+
+      } else {
+        z.innerHTML=("Nearest Place: " + data[i].name);
+        }
+    
     }
 
 };
@@ -56,10 +63,6 @@ function intervall() {
 function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
-      console.log("Navigator loaded");
-      
-      console.log("Get Distance");
-      
     } else { 
       x.innerHTML = "Geolocation is not supported by this browser.";
       console.log("Geolocation not present");
@@ -86,7 +89,7 @@ function getDistance(lat1, lon1, lat2, lon2){  // generally used geo measurement
     var d = R * c;
     var result = d *1000
     y.innerHTML = "Distance: " + result;
-    console.log("Distance to neareast Object");
+    console.log("Distance to nearest Object");
     return result; // meters
 }
 
