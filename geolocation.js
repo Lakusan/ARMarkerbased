@@ -12,17 +12,22 @@
     "name": "One",
     "lat": "49.224206",
     "lng": "8.786004",
-    "location": "Holzhaus"
+    "location": "Holzhaus",
+    "distance": "0"
 }, {
     "name": "Two",
-    "lat": "49.224094",
+    "lat": "43.224094",
     "lng": "8.786084",  
-    "location": "Pool"
+    "location": "Pool",
+    "distance": "0"
+
 }, {
     "name": "Three",
-    "lat": "49.224094",
-    "lng": " 8.786084",
-    "location": "Einfahrt"
+    "lat": "42.224941",
+    "lng": " 8.786584",
+    "location": "Einfahrt",
+    "distance": "0"
+
 }];
 
 
@@ -31,7 +36,7 @@ window.onload = () => {
   setInterval(getLocation, 1000);
   
   
-  setInterval(dist, 1000);
+  setInterval(distToArr, 1000);
   // const arr = [];
   // const min = arr.reduce((a,b) => Math.min(a,b));
 
@@ -39,20 +44,25 @@ window.onload = () => {
  
   };
 
-function dist() {
-  const arr = [];
+function distToArr() {
+  
    
     
   for (var i in data){
     var dist = getDistance(lat1, lon1, data[i].lat, data[i].lng);
     // console.log("Distance to " + data[i].location + " " + dist)
-    arr[i] = dist;
-    // console.log("array in for: " + arr[i])
+    data[i].distance = dist;
+   // console.log("Name: " + data[i].name + " Distance to Player: " + data[i].distance);
   };
-   console.log("Array: " + arr)
-  const min = arr.reduce((a,b) => Math.min(a,b));
-  console.log("Smallest Number in Array: " + min);
-  z.innerHTML= "Nächster Punkt in " + min + " Metern" ;
+   //console.log("Array: " + arr)
+  //  var min = arr.reduce((a,b) => Math.min(a,b));
+  // min = Math.round(min);
+  // z.innerHTML= "Nächster Punkt in " + min + " Metern" ;
+
+  //working sort method
+  data.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+console.log(data);
+  z.innerHTML = "Nearest Point: " + data[0].name;
 };
 
 
@@ -86,6 +96,7 @@ function getDistance(lat1, lon1, lat2, lon2){  // generally used geo measurement
     Math.sin(dLon/2) * Math.sin(dLon/2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c;
+   
     var result = d *1000
     
    
