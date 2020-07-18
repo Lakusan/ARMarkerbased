@@ -1,6 +1,9 @@
 window.onload = () => {
-var data = staticLoadPlaces();
+var data = {staticLoadPlaces()};
+
+};
 console.log("data.js");
+
 }
 
 function staticLoadPlaces() {
