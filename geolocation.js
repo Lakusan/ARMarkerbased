@@ -46,10 +46,10 @@ function intervall() {
     console.log(data);
     for (var i in data){
       
-      if ((getDistance(lat1, lon1, data[i].lat, data[i].lng)) > 10){
+      if ((getDistance(lat1, lon1, data[i].lat, data[i].lng)) > 3){
 
       } else {
-        z.innerHTML=("Nearest Place: " + data[i].name);
+        z.innerHTML=("Nearest Place: " + data[i].location);
         }
     
     }
@@ -88,7 +88,7 @@ function getDistance(lat1, lon1, lat2, lon2){  // generally used geo measurement
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c;
     var result = d *1000
-    y.innerHTML = "Distance: " + result;
+    
     console.log("Distance to nearest Object");
     return result; // meters
 }
