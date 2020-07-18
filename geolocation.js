@@ -5,14 +5,18 @@ var lat1;
 var lat2 = 49.224217;
 var lon1;
 var lon2 = 8.785972;
+console.log("geolocation.js");
 //works
 function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
-      getDistance(lat1, lon1, lat2, lon2);     
+      console.log("Navigator loaded");
+      getDistance(lat1, lon1, lat2, lon2);
+      console.log("Get Distance");
       
     } else { 
       x.innerHTML = "Geolocation is not supported by this browser.";
+      console.log("Geolocation not present");
     }
 }
 //works      
@@ -21,6 +25,7 @@ function showPosition(position) {
     "<br>Longitude: " + position.coords.longitude;
     lat1 = position.coords.latitude;
     lon1 = position.coords.longitude;
+    console.log("Own Position set");
 }
 //works - precision ~ 10m
 function getDistance(lat1, lon1, lat2, lon2){  // generally used geo measurement function
@@ -34,12 +39,13 @@ function getDistance(lat1, lon1, lat2, lon2){  // generally used geo measurement
     var d = R * c;
     var result = d *1000
     y.innerHTML = "Distance: " + result;
+    console.log("Distance to neareast Object");
     return result; // meters
 }
 
 // checks all POI and selects nearest as active -> every 30 sek
 function nearestPOI(){
-
+  console.log("Nearest Object set");
 }
 
 

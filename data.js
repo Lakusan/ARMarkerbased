@@ -1,10 +1,8 @@
 window.onload = () => {
-
-
 var data = staticLoadPlaces();
-
-
+console.log("data.js");
 }
+
 function staticLoadPlaces() {
     return [
         {
@@ -12,6 +10,7 @@ function staticLoadPlaces() {
             location: {
                 lat: 49.80404, // change here latitude if using static data
                 lng: 9.96233, // change here longitude if using static data
+                
             }
         },
         {
@@ -22,6 +21,7 @@ function staticLoadPlaces() {
             }
         },
     ];
+    console.log("POI Coords loaded");
 }
 
 
