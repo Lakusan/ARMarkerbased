@@ -4,6 +4,7 @@ console.log("data.js");
 }
 
 function staticLoadPlaces() {
+    console.log("POI Coords loaded");
     return [
         {
             name: "One",
@@ -20,8 +21,7 @@ function staticLoadPlaces() {
                 lng: 9.96233, // change here longitude if using static data
             }
         },
-    ];
-    console.log("POI Coords loaded");
+    ];  
 }
 
 
