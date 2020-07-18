@@ -4,7 +4,7 @@ var data = {staticLoadPlaces()};
 };
 console.log("data.js");
 
-}
+
 
 function staticLoadPlaces() {
     console.log("POI Coords loaded");
