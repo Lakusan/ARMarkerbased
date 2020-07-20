@@ -5,28 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR-Geolocatio-Marker</title>
    
-   
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <!-- we import arjs version without NFT but with marker + location based support -->
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     
 
 </head>
 
 
+<script>
+    window.addEventListener('camera-init', (data) => {
+        console.log('camera-init', data);
+    })
 
-<body>
-    
+    window.addEventListener('camera-error', (error) => {
+        console.log('camera-error', error);
+    })
 
-    <!-- <button onclick="getLocation()">Try It</button> -->
-    <p id="demo"></p>
-    <p id="result"></p>
-    <p id="activePOI"></p>
-    <p id="nextPOI"></p>
-    <p id="places"></p>
+    //Register Events (Marker)
+	AFRAME.registerComponent('registerevents', {
+		init: function () {
+			var marker = this.el;
 
-    <p id="place1"></p>
-    <p id="place2"></p>
-    <p id="place3"></p>
-    <p id="place4"></p>
+			marker.addEventListener('markerFound', function() {
+				var markerId = marker.id;
+				console.log('markerFound', markerId);
+				// TODO: Add your own code here to react to the marker being found.
+			});
+
+			marker.addEventListener('markerLost', function() {
+				var markerId = marker.id;
+				console.log('markerLost', markerId);
+				// TODO: Add your own code here to react to the marker being lost.
+			});
+		}
+    });
+
+//     //Register Events for loading external 3D-Components
+//     AFRAME.registerComponent('modify-materials', {
+//     init: function () {
+//       // Wait for model to load.
+//       this.el.addEventListener('model-loaded', () => {
+//         // Grab the mesh / scene.
+//         const obj = this.el.getObject3D('mesh');
+//         // Go over the submeshes and modify materials we want.
+//         obj.traverse(node => {
+//           if (node.name.indexOf('ship') !== -1) {
+//             node.material.color.set('red');
+//           }
+//         });
+//       });
+//     }
+//   });
+</script>
+
+<body style="margin: 0px; overflow: hidden;">
+<script>
+
+</script>
+ <!-- DEBUG -->
+ <div>
+ <p id="info"></p>
+ <p id="result"></p>
+ <p id="activePOI"></p>
+ <p id="nextPOI"></p>
+ <p id="places"></p>
+</div>
+
+<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' renderer='precision: best;'>
+    <!-- Load Models -->
+    <a-assets>
+        <a-asset-item id = "cocktail" src="assets/PinaColada(1).gltf"></a-asset-item>
+    </a-assets>
+    <a-marker preset='hiro' id='marker-hiro' registerevents>
+                  <!-- x z y -->
+            <a-entity             
+            position="0 0 0"
+            scale="1.5 1.5 1.5"
+            gltf-model="#cocktail"
+            modify-materials
+          ></a-entity>
+
+          <a-entity
+          id = 'story'
+          geometry="primitive: plane; height: auto; width: auto"
+          material="color: blue"
+          text="width: 4; value: This text will be 4 units wide."></a-entity>
+         
+    </a-marker>
+
+
+
+    <a-entity camera></a-entity>
+</a-scene>
+
     <script src="./geolocation.js"></script>
+
+       
+
     
     
 </body>
