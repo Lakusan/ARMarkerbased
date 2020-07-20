@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR-Geolocatio-Marker</title>
-   
+    <title>AR-Schnitzeljagt</title>
+    
+    <!-- A-Frame + AR.js -->
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     
 </head>
 
-
 <script>
-
+    //Events
     window.addEventListener('camera-init', (data) => {
         console.log('camera-init', data);
     })
@@ -21,7 +21,7 @@
         console.log('camera-error', error);
     })
 
-    //Register Events (Marker)
+    //Register AREME-Events (Marker)
 	AFRAME.registerComponent('registerevents', {
 		init: function () {
 			var marker = this.el;
@@ -39,18 +39,21 @@
 			});
 		}
     });
-
 </script>
 
 <body style="margin: 0px; overflow: hidden;">
 
 <a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' renderer='precision: best;' >
 
-    <!-- Load Models -->
+    <!-- Load Assets -->
     <a-assets>
+        <!-- CC_BY Google Poly -->
         <a-asset-item id = "cocktail" src="assets/PinaColada(1).gltf"></a-asset-item>
-    </a-assets>
+        <!-- CC_BY Bruno Oliveira - Google Poly -->
+        <a-asset-item id = "message" src="assets/model.gltf"></a-asset-item>
 
+    </a-assets>
+<!-- Intro Text -->
     <a-marker preset='hiro' id='marker-hiro' registerevents>
         <a-plane id='storyPlane' color="#BF00FF" height="2.8", width="2.1" rotation=" -90 0 0">
           <a-entity
@@ -72,11 +75,11 @@
           visible = "true"
           ></a-entity>
           </a-plane>
-         
+<!-- Quest text with Mulitple-Choice-Answers         -->
           <a-plane id='questPlane' color="#BF00FF" height="2.8", width="2.1" rotation=" -90 0 0">
           
           <a-entity 
-          id='cocktail'         
+          id='gltfModel'         
           position="0 1.5 .1"
           scale="1.5 1.5 1.5"
           gltf-model="#cocktail"
@@ -92,7 +95,7 @@
           font ="assets/Ranchers/Ranchers-Regular.ttf"
           rotation ="0 0 0"
           position = "0 1.2 .1"
-          visible = "false"
+          
           ></a-entity>
 
           <a-entity
@@ -126,7 +129,7 @@
     <a-entity camera></a-entity>
 
 </a-scene>
-
+<!-- Logic Scritp -->
 <script src="./geolocation.js"></script>
 
 </body>

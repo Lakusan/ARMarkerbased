@@ -7,11 +7,10 @@
   var answer2 = document.getElementById("answer2");
   var answer3 = document.getElementById("answer3");
   var story = document.getElementById("story");
-  var cocktail = document.getElementById("cocktail");
+  var gltfModel = document.getElementById("gltfModel");
+
   
-
-
-//JSON Object Array - Store POI Data 
+  //JSON Object Array - Store POI Data 
   var data = [{
     "name": "One",
     "lat": "49.224124",
@@ -28,7 +27,7 @@
     "lng": "8.785839",  
     "location": "Insel",
     "distance": "0",
-    "question": "Was macht die Erdbeere zu einer ganz besonderen Frucht ?",  
+    "question": "INSEL!!!!!! ?",  
     "answer1":"a) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewaechse gehören. ",
     "answer2":"b) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Gemuese, weil die ganz alten Sorten der Erdbeeren, die aus Suedamerika importiert wurden, noch sauer geschmeckt haben. ",
     "answer3":"c) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Nuss, wegen der kleinen gruenen Kerne auf der Beere. "
@@ -67,7 +66,6 @@
 
 
 window.onload = () => {
-
   //Intervals for geolocation
   setInterval(getLocation, 1000);
   setInterval(distToArr, 1000);
@@ -75,15 +73,13 @@ window.onload = () => {
   setInterval(hideStory, 1000);
   };
 
-// Call getDistance for elemets in data && sort data by distance
-function distToArr() {
- 
-  for (var i in data){
 
+// Call getDistance for elements in data && sort data by distance
+function distToArr() {
+  for (var i in data){
     var dist = getDistance(lat1, lon1, data[i].lat, data[i].lng);
     data[i].distance = dist;    
     }
-
   data.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
 };
 
@@ -92,6 +88,7 @@ function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
     } else { 
+      //Error => Msg - > do this later
     }
 }
 
@@ -118,6 +115,7 @@ function getDistance(lat1, lon1, lat2, lon2){
 
 //Set insert active StoryString
 function insertStory(){
+  // TODO: loop
   question.setAttribute('text','value', data[0].question);
   answer1.setAttribute('text','value', data[0].answer1);
   answer2.setAttribute('text','value', data[0].answer2);
@@ -126,22 +124,16 @@ function insertStory(){
 
 //Hide Intro txt if next POI is father than x meters
 function hideStory(){
-  if (data[0].distance > 20)
-  {
-   console.log("Story-Mode");
-   console.log("Distance", data[0].distance);
+  if (data[0].distance > 10)
+  { // TODO: for loop with array
    story.setAttribute('visible', true);
-
    cocktail.setAttribute('visible',false);
    question.setAttribute('visible',false);
    answer1.setAttribute('visible',false);
    answer2.setAttribute('visible',false);
    answer3.setAttribute('visible',false);
   } else {
-    console.log("Adventure-Mode");
-    console.log(data[0].distance);
     story.setAttribute('visible', false);
-
     cocktail.setAttribute('visible',true);
     question.setAttribute('visible',true);
     answer1.setAttribute('visible',true);
