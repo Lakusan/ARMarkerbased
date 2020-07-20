@@ -8,9 +8,7 @@
   var answer3 = document.getElementById("answer3");
   var story = document.getElementById("story");
   var gltfModel = document.getElementById("gltfModel");
-  var distToStart;
-  
-
+  var distStart;
   
   //JSON Object Array - Store POI Data 
   var data = [{
@@ -87,10 +85,6 @@ window.onload = () => {
   setInterval(distToArr, 1000);
   setInterval(insertStory, 1000);
   setInterval(hideStory, 1000);
-  while (1){
-    var distStart = getDistance(lat1,lon1,latStart,lngStart);
-    console.log(distStart)
-  }
   };
 
 
@@ -98,7 +92,11 @@ window.onload = () => {
 function distToArr() {
   for (var i in data){
     var dist = getDistance(lat1, lon1, data[i].lat, data[i].lng);
-    data[i].distance = dist;    
+    data[i].distance = dist; 
+    if(data[i].name === "One"){
+      distStart = data[i].distance;
+      console.log(data[i].name + " " + data[i].distance);   
+      }
     }
   data.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
 };
@@ -144,8 +142,10 @@ function insertStory(){
 
 //Hide Intro txt if next POI is father than x meters
 function hideStory(){
-  if (distStart > 2 )
+  
+  if (distStart < 5 )
   { // TODO: for loop with array
+    console.log("true");
    story.setAttribute('visible', true);
    gltfModel.setAttribute('visible',false);
    question.setAttribute('visible',false);
@@ -153,6 +153,7 @@ function hideStory(){
    answer2.setAttribute('visible',false);
    answer3.setAttribute('visible',false);
   } else {
+    console.log("false");
     story.setAttribute('visible', false);
     gltfModel.setAttribute('visible',true);
     question.setAttribute('visible',true);
