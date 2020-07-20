@@ -111,9 +111,10 @@ function insertStory(){
 //Push Button to hide Story an show content
 
 function hideStory(){
-  if (data[0].distance > 1)
+  if (data[0].distance > 10)
   {
    console.log("Story-Mode");
+   console.log("Distance", data[0].distance);
    story.setAttribute('visible', true);
 
    cocktail.setAttribute('visible',false);
@@ -123,6 +124,7 @@ function hideStory(){
    answer3.setAttribute('visible',false);
   } else {
     console.log("Adventure-Mode");
+    console.log(data[0].distance);
     story.setAttribute('visible', false);
 
     cocktail.setAttribute('visible',true);
