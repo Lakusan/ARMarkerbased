@@ -27,7 +27,7 @@
     "lng": "8.785839",  
     "location": "Insel",
     "distance": "0",
-    "question": "INSEL!!!!!! ?",  
+    "question": "INSEL!!!!!!",  
     "answer1":"a) Insel",
     "answer2":"b) Insel",
     "answer3":"c) Insel "
