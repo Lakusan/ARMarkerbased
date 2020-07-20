@@ -9,12 +9,9 @@
   var answer2 = document.getElementById("answer2");
   var answer3 = document.getElementById("answer3");
   var story = document.getElementById("story");
+  var cocktail = document.getElementById("cocktail");
   
-// //Click Event -  Hide Story
-//   story.addEventListener('touchend', function() {
-//     story.setAttribute('visible', false);
-//     console.log("Touched");
-//   });
+
 
 //JSON Object Array - Store POI Data 
   var data = [{
@@ -53,6 +50,7 @@ window.onload = () => {
   setInterval(getLocation, 1000);
   setInterval(distToArr, 1000);
   setInterval(insertStory, 1000);
+  setInterval(hideStory, 1000);
   };
 
 // Call getDistance for elemets in data && sort data by distance
@@ -113,11 +111,27 @@ function insertStory(){
 //Push Button to hide Story an show content
 
 function hideStory(){
- story.setAttribute('visible', false);
- question.setAttribute('visible',true);
-  answer1.setAttribute('visible',true);
-  answer2.setAttribute('visible',true);
-  answer3.setAttribute('visible',true);
+  if (data[0].distance > 1)
+  {
+   console.log("Story-Mode");
+   story.setAttribute('visible', true);
+
+   cocktail.setAttribute('visible',false);
+   question.setAttribute('visible',false);
+   answer1.setAttribute('visible',false);
+   answer2.setAttribute('visible',false);
+   answer3.setAttribute('visible',false);
+  } else {
+    console.log("Adventure-Mode");
+    story.setAttribute('visible', false);
+
+    cocktail.setAttribute('visible',true);
+    question.setAttribute('visible',true);
+    answer1.setAttribute('visible',true);
+    answer2.setAttribute('visible',true);
+    answer3.setAttribute('visible',true);
+  }
+
 }
 
 
