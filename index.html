@@ -40,23 +40,27 @@
 			});
 		}
     });
+    AFRAME.registerComponent('change-color-on-hover', {
+    schema: {
+      color: {default: 'red'}
+    },
+
+    init: function () {
+      var data = this.data;
+      var el = this.el;  // <a-box>
+      var defaultColor = el.getAttribute('material').color;
+
+      el.addEventListener('touchstart', function () {
+        el.setAttribute('color', data.color);
+      });
+
+      el.addEventListener('touchend', function () {
+        el.setAttribute('color', defaultColor);
+      });
+    }
+  });
    
-//     //Register Events for loading external 3D-Components
-//     AFRAME.registerComponent('modify-materials', {
-//     init: function () {
-//       // Wait for model to load.
-//       this.el.addEventListener('model-loaded', () => {
-//         // Grab the mesh / scene.
-//         const obj = this.el.getObject3D('mesh');
-//         // Go over the submeshes and modify materials we want.
-//         obj.traverse(node => {
-//           if (node.name.indexOf('ship') !== -1) {
-//             node.material.color.set('red');
-//           }
-//         });
-//       });
-//     }
-//   });
+
 </script>
 
 <body style="margin: 0px; overflow: hidden;">
@@ -73,16 +77,7 @@
 </div>
 
 <a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' renderer='precision: best;' >
-    <!-- Load Models -->
-    <a-assets>
-        <a-asset-item id = "cocktail" src="assets/PinaColada(1).gltf"></a-asset-item>
-    </a-assets>
-
-    <a-marker preset='hiro' id='marker-hiro' registerevents>
-        
-
-
-        <a-entity
+    <!-- <a-plane
         id = 'story'
         material="color: red"
         text="width: 4; value: Hey Girls (guys), hier ist Chris, der Barkeeper vom Club Tropicana… willkommen in unserem Club, fuehlt euch wie zu Hause, wir werden heute die beste Party aller Zeiten feiern! Nur leider… ist mir da ein Missgeschick mit meinen Terminen passiert, you know? Ich brauche eure Hilfe, damit nicht alle Gaeste auf dem Trockenen sitzen… Ich muss heute ganz dringend auf ein Date mit meiner Freundin, die macht mir sonst die Hoelle heiss... ich habe naemlich fast ihren Geburtstag vergessen! Ihr uebernehmt doch meine Schicht an der Bar fuer mich, oder? Und dann gab es da noch ein kleines Missgeschick… ich habe mich so beeilt als ich heute Morgen meinen Hund zum Frisoer gebracht habe, dass mir meine Notizen aus meinem Rezeptbuch gefallen sind – ich habe da naemlich diesen neuen Drink entwickelt – suuuuper lecker – sammelt die doch bitte wieder ein, und dann kann die Cocktail- Party losgehen! Scannt einfach den Code und folgt den Hinweisen… "
@@ -90,8 +85,15 @@
         position = "0 0 0"
         geometry = "primitive: plane"
         visible = "true"
-        ></a-entity>
-
+        ></a-plane> -->
+        
+    <!-- Load Models -->
+    <a-assets>
+        <a-asset-item id = "cocktail" src="assets/PinaColada(1).gltf"></a-asset-item>
+    </a-assets>
+    <a-box color="#EF2D5E" position="0 0 -2" change-color-on-hover="color: blue"></a-box>
+    <a-marker preset='hiro' id='marker-hiro' registerevents>
+    
             <a-entity             
             position="0 0 0"
             scale="1.5 1.5 1.5"
@@ -99,7 +101,7 @@
             modify-materials
             animation="property: rotation; dur: 10000; to: -10 0 0; loop:true; easing:linear"
             rotation="-45 0 0"
-            visible = "false"
+            visible = "true"
           ></a-entity>
           
           <a-entity
@@ -146,10 +148,7 @@
 
 
     <a-entity camera>
-        <a-entity cursor="fuse: true; fuseTimeout: 500"
-        position="0 0 -1"
-        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-        material="color: black; shader: flat">
+      <a-cursor></a-cursor>
 </a-entity>
 
     </a-entity>

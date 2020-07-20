@@ -10,10 +10,11 @@
   var answer3 = document.getElementById("answer3");
   var story = document.getElementById("story");
   
-
-  story.addEventListener('click', function() {
-    story.setAttribute('visible', false);
-  });
+// //Click Event -  Hide Story
+//   story.addEventListener('touchend', function() {
+//     story.setAttribute('visible', false);
+//     console.log("Touched");
+//   });
 
 //JSON Object Array - Store POI Data 
   var data = [{
@@ -23,7 +24,7 @@
     "location": "Garten_Pool",
     "distance": "0",
     "question": "Was macht die Erdbeere zu einer ganz besonderen Frucht ?",  
-    "answer1":"a)  Sie zählt eigentlich nicht zu den Früchten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewächse gehören. ",
+    "answer1":"a) Sie zählt eigentlich nicht zu den Früchten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewächse gehören. ",
     "answer2":"b) Sie zählt eigentlich nicht zu den Früchten, sondern als Gemüse, weil die ganz alten Sorten der Erdbeeren, die aus Südamerika importiert wurden, noch sauer geschmeckt haben. ",
     "answer3":"c) Sie zählt eigentlich nicht zu den Früchten, sondern als Nuss, wegen der kleinen grünen Kerne auf der Beere. "
 }, {
