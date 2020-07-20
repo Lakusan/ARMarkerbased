@@ -40,7 +40,10 @@
 			});
 		}
     });
-
+    var targetEl = document.querySelector('#story');
+targetEl.addEventListener('click', function() {
+  targetEl.setAttribute('material', {color: 'red'});
+});
 //     //Register Events for loading external 3D-Components
 //     AFRAME.registerComponent('modify-materials', {
 //     init: function () {
@@ -72,36 +75,92 @@
  <p id="places"></p>
 </div>
 
-<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' renderer='precision: best;'>
+<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' renderer='precision: best;' >
     <!-- Load Models -->
     <a-assets>
         <a-asset-item id = "cocktail" src="assets/PinaColada(1).gltf"></a-asset-item>
     </a-assets>
+
     <a-marker preset='hiro' id='marker-hiro' registerevents>
-                  <!-- x z y -->
+        
+
+
+        <a-entity
+        id = 'story'
+        material="color: red"
+        text="width: 4; value: Hey Girls (guys), hier ist Chris, der Barkeeper vom Club Tropicana… willkommen in unserem Club, fuehlt euch wie zu Hause, wir werden heute die beste Party aller Zeiten feiern! Nur leider… ist mir da ein Missgeschick mit meinen Terminen passiert, you know? Ich brauche eure Hilfe, damit nicht alle Gaeste auf dem Trockenen sitzen… Ich muss heute ganz dringend auf ein Date mit meiner Freundin, die macht mir sonst die Hoelle heiss... ich habe naemlich fast ihren Geburtstag vergessen! Ihr uebernehmt doch meine Schicht an der Bar fuer mich, oder? Und dann gab es da noch ein kleines Missgeschick… ich habe mich so beeilt als ich heute Morgen meinen Hund zum Frisoer gebracht habe, dass mir meine Notizen aus meinem Rezeptbuch gefallen sind – ich habe da naemlich diesen neuen Drink entwickelt – suuuuper lecker – sammelt die doch bitte wieder ein, und dann kann die Cocktail- Party losgehen! Scannt einfach den Code und folgt den Hinweisen… "
+        rotation ="-90 0 0"
+        position = "0 0 0"
+        geometry = "primitive: plane"
+        
+        ></a-entity>
+
             <a-entity             
             position="0 0 0"
             scale="1.5 1.5 1.5"
             gltf-model="#cocktail"
             modify-materials
+            animation="property: rotation; dur: 10000; to: -10 0 0; loop:true; easing:linear"
+            rotation="-45 0 0"
+            visible = "false"
+          ></a-entity>
+          
+          <a-entity
+          id = 'question'
+          material="color: blue"
+          text="width: 4; value: Example"
+          rotation ="-90 0 0"
+          position = "0 0 1"
+          visible = "false"
           ></a-entity>
 
           <a-entity
-          id = 'story'
-          geometry="primitive: plane; height: auto; width: auto"
+          id = 'answer1'
           material="color: blue"
-          text="width: 4; value: This text will be 4 units wide."></a-entity>
+          text="width: 4; value: Example"
+          rotation ="-90 0 0"
+          position = "0 0 2"
+          visible = "false"
+          ></a-entity>
+
+          <a-entity
+          id = 'answer2'
+          material="color: blue"
+          text="width: 4; value: Example"
+          rotation ="-90 0 0"
+          position = "0 0 3"
+          visible = "false"
+          ></a-entity>
+
+          <a-entity
+          id = 'answer3'
+          material="color: blue"
+          text="width: 4; value: Example"
+          rotation ="-90 0 0"
+          position = "0 0 4"
+          visible = "false"
+          ></a-entity>
+
+
+         
          
     </a-marker>
+   
 
 
+    <a-entity camera>
+        <a-entity cursor="fuse: true; fuseTimeout: 500"
+        position="0 0 -1"
+        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+        material="color: black; shader: flat">
+</a-entity>
 
-    <a-entity camera></a-entity>
+    </a-entity>
 </a-scene>
 
     <script src="./geolocation.js"></script>
 
-       
+
 
     
     

@@ -4,6 +4,11 @@
   var lat2;
   var lon1;
   var lon2;
+  var question = document.getElementById("question");
+  var answer1 = document.getElementById("answer1");
+  var answer2 = document.getElementById("answer2");
+  var answer3 = document.getElementById("answer3");
+  var story = document.getElementById("story");
   
 
 //JSON Object Array - Store POI Data 
@@ -13,15 +18,17 @@
     "lng": "8.786031",
     "location": "Garten_Pool",
     "distance": "0",
-    "story": "Station 1 - Hinweis 1"
-
+    "question": "Was macht die Erdbeere zu einer ganz besonderen Frucht ?",  
+    "answer1":"a)  Sie zählt eigentlich nicht zu den Früchten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewächse gehören. ",
+    "answer2":"b) Sie zählt eigentlich nicht zu den Früchten, sondern als Gemüse, weil die ganz alten Sorten der Erdbeeren, die aus Südamerika importiert wurden, noch sauer geschmeckt haben. ",
+    "answer3":"c) Sie zählt eigentlich nicht zu den Früchten, sondern als Nuss, wegen der kleinen grünen Kerne auf der Beere. "
 }, {
     "name": "Two",
     "lat": "49.224165",
     "lng": "8.785761",  
     "location": "Einfahrt",
     "distance": "0",
-    "story": "Station 2 - Hinweis 2"
+    "quest": "Station 2 - Hinweis 2"
 
 }, {
     "name": "Three",
@@ -92,12 +99,21 @@ function getDistance(lat1, lon1, lat2, lon2){
 
 //Set insert active StoryString
 function insertStory(){
-  var txtField = document.getElementById("story");
-  
-  txtField.setAttribute('text','value', data[0].story)
-  
-
-
+  question.setAttribute('text','value', data[0].question);
+  answer1.setAttribute('text','value', data[0].answer1);
+  answer2.setAttribute('text','value', data[0].answer2);
+  answer3.setAttribute('text','value', data[0].answer3);
 }
+
+//Push Button to hide Story an show content
+
+function hideStory(){
+ story.setAttribute('visible', false);
+ question.setAttribute('visible',true);
+  answer1.setAttribute('visible',true);
+  answer2.setAttribute('visible',true);
+  answer3.setAttribute('visible',true);
+}
+
 
 
