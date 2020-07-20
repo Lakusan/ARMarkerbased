@@ -11,6 +11,10 @@
   var story = document.getElementById("story");
   
 
+  story.addEventListener('click', function() {
+    story.setAttribute('visible', false);
+  });
+
 //JSON Object Array - Store POI Data 
   var data = [{
     "name": "One",
