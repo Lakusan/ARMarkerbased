@@ -1,5 +1,3 @@
-  var activePOI = document.getElementById("activePOI");
-  var info = document.getElementById("info");
   var lat1;
   var lat2;
   var lon1;
@@ -21,24 +19,48 @@
     "location": "Garten_Pool",
     "distance": "0",
     "question": "Was macht die Erdbeere zu einer ganz besonderen Frucht ?",  
-    "answer1":"a) Sie zählt eigentlich nicht zu den Früchten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewächse gehören. ",
-    "answer2":"b) Sie zählt eigentlich nicht zu den Früchten, sondern als Gemüse, weil die ganz alten Sorten der Erdbeeren, die aus Südamerika importiert wurden, noch sauer geschmeckt haben. ",
-    "answer3":"c) Sie zählt eigentlich nicht zu den Früchten, sondern als Nuss, wegen der kleinen grünen Kerne auf der Beere. "
+    "answer1":"a) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewaechse gehören. ",
+    "answer2":"b) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Gemuese, weil die ganz alten Sorten der Erdbeeren, die aus Suedamerika importiert wurden, noch sauer geschmeckt haben. ",
+    "answer3":"c) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Nuss, wegen der kleinen gruenen Kerne auf der Beere. "
 }, {
     "name": "Two",
-    "lat": "49.224165",
-    "lng": "8.785761",  
-    "location": "Einfahrt",
+    "lat": "49.223689",
+    "lng": "8.785839",  
+    "location": "Insel",
     "distance": "0",
-    "quest": "Station 2 - Hinweis 2"
+    "question": "Was macht die Erdbeere zu einer ganz besonderen Frucht ?",  
+    "answer1":"a) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewaechse gehören. ",
+    "answer2":"b) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Gemuese, weil die ganz alten Sorten der Erdbeeren, die aus Suedamerika importiert wurden, noch sauer geschmeckt haben. ",
+    "answer3":"c) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Nuss, wegen der kleinen gruenen Kerne auf der Beere. "
 
 }, {
     "name": "Three",
-    "lat": "49.223689",
-    "lng": " 8.785839",
-    "location": "Insel",
+    "lat": "49.222547",
+    "lng": "8.785705",
+    "location": "Ecke Etzwiesenstraße",
     "distance": "0",
     "story": "Station 3 - Hinweis 3"
+  }, {
+    "name": "Four",
+    "lat": "49.221656",
+    "lng": "8.785940",
+    "location": "Ecke Brunnenstraße",
+    "distance": "0",
+    "story": "Station 4 - Hinweis 4"
+  }, {
+    "name": "Five",
+    "lat": "49.22213",
+    "lng": "8.785160",
+    "location": "Obere Brunngenstraße",
+    "distance": "0",
+    "story": "Station 5 - Hinweis 5"
+  }, {
+    "name": "Six",
+    "lat": "49.223449",
+    "lng": "8.784573",
+    "location": "Ecke Talstraße",
+    "distance": "0",
+    "story": "Station 6 - Hinweis 6"
   }
 
 ];
@@ -63,9 +85,6 @@ function distToArr() {
     }
 
   data.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
- 
-  activePOI.innerHTML = "Active POI: " + data[0].location;
-
 };
 
 //get geolocation of User
@@ -73,14 +92,11 @@ function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
     } else { 
-      info.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
 //Debug - Show actual geolocation of User 
 function showPosition(position) {
-    info.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
     lat1 = position.coords.latitude;
     lon1 = position.coords.longitude;
 }
@@ -108,10 +124,9 @@ function insertStory(){
   answer3.setAttribute('text','value', data[0].answer3);
 }
 
-//Push Button to hide Story an show content
-
+//Hide Intro txt if next POI is father than x meters
 function hideStory(){
-  if (data[0].distance > 10)
+  if (data[0].distance > 20)
   {
    console.log("Story-Mode");
    console.log("Distance", data[0].distance);
@@ -133,7 +148,6 @@ function hideStory(){
     answer2.setAttribute('visible',true);
     answer3.setAttribute('visible',true);
   }
-
 }
 
 
