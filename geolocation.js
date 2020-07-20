@@ -87,10 +87,10 @@ window.onload = () => {
   setInterval(distToArr, 1000);
   setInterval(insertStory, 1000);
   setInterval(hideStory, 1000);
-  while (1){
-    var distStart = getDistance(lat1,lon1,latStart,lngStart);
-    console.log(distStart)
-  }
+  // while (1){
+  //   var distStart = getDistance(lat1,lon1,latStart,lngStart);
+  //   console.log(distStart)
+  // }
   };
 
 
