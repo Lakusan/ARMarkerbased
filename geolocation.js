@@ -10,7 +10,7 @@ var story = document.getElementById("story");
 var debug = document.getElementById("debug");
 var gltfModel = document.getElementById("gltfModel");
 var distStart; // Calc distance own pos - starting point
-var pts = 0; // Player Pts
+var pts = 1; // Player Pts
 var introVisible = true; // Bool for checking if Intro was seen
 
 
