@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR-Schnitzeljagt</title>
-    
+
     <!-- A-Frame + AR.js -->
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    
+
 </head>
 
 <script>
@@ -22,40 +23,40 @@
     })
 
     //Register AREME-Events (Marker)
-	AFRAME.registerComponent('registerevents', {
-		init: function () {
-			var marker = this.el;
+    AFRAME.registerComponent('registerevents', {
+        init: function () {
+            var marker = this.el;
 
-			marker.addEventListener('markerFound', function() {
-				var markerId = marker.id;
-				console.log('markerFound', markerId);
-				// TODO: Add your own code here to react to the marker being found.
-			});
+            marker.addEventListener('markerFound', function () {
+                var markerId = marker.id;
+                console.log('markerFound', markerId);
+                getPts();
 
-			marker.addEventListener('markerLost', function() {
-				var markerId = marker.id;
-				console.log('markerLost', markerId);
-				// TODO: Add your own code here to react to the marker being lost.
-			});
-		}
+            });
+
+            marker.addEventListener('markerLost', function () {
+                var markerId = marker.id;
+                console.log('markerLost', markerId);
+
+            });
+        }
     });
 </script>
 
 <body style="margin: 0px; overflow: hidden;">
 
-<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' renderer='precision: best;' >
+    <a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'
+        renderer='precision: best;'>
 
-    <!-- Load Assets -->
-    <a-assets>
-        <!-- CC_BY Google Poly -->
-        <a-asset-item id = "cocktail" src="assets/PinaColada(1).gltf"></a-asset-item>
-    </a-assets>
-<!-- Intro Text -->
-    <a-marker preset='hiro' id='marker-hiro' registerevents>
-        <a-plane id='storyPlane' color="#BF00FF" height="2.8", width="2.1" rotation=" -90 0 0">
-          <a-entity
-          id = 'story'
-          text="width: 2; value: Hey Girls (guys), hier ist Chris, der Barkeeper vom Club Tropicana…   willkommen in unserem Club, fuehlt euch wie zu Hause, wir werden heute die beste Party aller Zeiten   feiern! 
+        <!-- Load Assets -->
+        <a-assets>
+            <!-- CC_BY Google Poly -->
+            <a-asset-item id="cocktail" src="assets/PinaColada(1).gltf"></a-asset-item>
+        </a-assets>
+        <!-- Intro Text -->
+        <a-marker preset='hiro' id='marker-hiro' registerevents>
+            <a-plane id='storyPlane' color="#BF00FF" height="2.8" , width="2.1" rotation=" -90 0 0">
+                <a-entity id='story' text="width: 2; value: Hey Girls (guys), hier ist Chris, der Barkeeper vom Club Tropicana…   willkommen in unserem Club, fuehlt euch wie zu Hause, wir werden heute die beste Party aller Zeiten   feiern! 
 
           Nur leider… ist mir da ein Missgeschick mit meinen Terminen passiert, you know? 
           Ich brauche eure Hilfe, damit nicht alle Gaeste auf dem Trockenen sitzen… Ich muss heute ganz    dringend auf ein Date mit meiner Freundin, die macht mir sonst die Hoelle heiss... 
@@ -66,68 +67,37 @@
         
           Have fun girls, und vergesst nicht, immer laecheln im Club Tropicana, drinks are free
           fun and sunshine, there's enough for everyone! 
-          "
-          rotation ="0 0 0"
-          position = "0 0 .1"
-          visible = "true"
-          ></a-entity>
-          </a-plane>
-<!-- Quest text with Mulitple-Choice-Answers         -->
-          <a-plane id='questPlane' color="#BF00FF" height="2.8", width="2.1" rotation=" -90 0 0">
-          
-          <a-entity 
-          id='gltfModel'         
-          position="0 1.5 .1"
-          scale="1.5 1.5 1.5"
-          gltf-model="#cocktail"
-          modify-materials
-          animation="property: rotation; dur: 10000; to: 0 360 0; loop:true; easing:linear"
-          rotation="0 0 0"
-          visible = "true"
-          ></a-entity>
-          
-          <a-entity
-          id = 'question'
-          text="width: 2; value: Example"
-          font ="assets/Ranchers/Ranchers-Regular.ttf"
-          rotation ="0 0 0"
-          position = "0 1.2 .1"
-          
-          ></a-entity>
+          " rotation="0 0 0" position="0 0 .1" visible="true"></a-entity>
+            </a-plane>
+            <!-- Quest text with Mulitple-Choice-Answers         -->
+            <a-plane id='questPlane' color="#BF00FF" height="2.8" , width="2.1" rotation=" -90 0 0">
 
-          <a-entity
-          id = 'answer1'
-          text="width: 2; value: Example"
-          rotation ="0 0 0"
-          position = "0 .5 .1"
-          visible = "false"
-          ></a-entity>
+                <a-entity id='gltfModel' position="0 1.5 .1" scale="1.5 1.5 1.5" gltf-model="#cocktail" modify-materials
+                    animation="property: rotation; dur: 10000; to: 0 360 0; loop:true; easing:linear" rotation="0 0 0"
+                    visible="true"></a-entity>
 
-          <a-entity
-          id = 'answer2'
-          text="width: 2; value: Example"
-          rotation ="0 0 0"
-          position = "0 0 .1"
-          visible = "false"
-          ></a-entity>
+                <a-entity id='question' text="width: 2; value: Example" font="assets/Ranchers/Ranchers-Regular.ttf"
+                    rotation="0 0 0" position="0 1.2 .1"></a-entity>
 
-          <a-entity
-          id = 'answer3'
-          text="width: 2; value: Example"
-          rotation ="0 0 0"
-          position = "0 -.5 .1"
-          visible = "false"
-          ></a-entity>
+                <a-entity id='answer1' text="width: 2; value: Example" rotation="0 0 0" position="0 .5 .1"
+                    visible="false"></a-entity>
 
-        </a-plane>
-                 
-    </a-marker>
-   
-    <a-entity camera></a-entity>
+                <a-entity id='answer2' text="width: 2; value: Example" rotation="0 0 0" position="0 0 .1"
+                    visible="false"></a-entity>
 
-</a-scene>
-<!-- Logic Script -->
-<script src="./geolocation.js"></script>
+                <a-entity id='answer3' text="width: 2; value: Example" rotation="0 0 0" position="0 -.5 .1"
+                    visible="false"></a-entity>
+
+            </a-plane>
+
+        </a-marker>
+
+        <a-entity camera></a-entity>
+
+    </a-scene>
+    <!-- Logic Script -->
+    <script src="./geolocation.js"></script>
 
 </body>
+
 </html>
