@@ -205,7 +205,8 @@ function hideStory() {
 
 //Get Pts for finding the points once
 function getPts() {
-  if (data[0].pts !== "0") {
+  var dataPts = Number(data[0].pts);
+  if (dataPts !== 0) {
     data[0].pts = "0";
     pts++;
   }
