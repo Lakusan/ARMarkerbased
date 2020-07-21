@@ -10,6 +10,7 @@ var story = document.getElementById("story");
 var gltfModel = document.getElementById("gltfModel");
 var distStart; // Calc distance own pos - starting point
 var pts = 0; // Player Pts
+var introVisible = true; // Bool for checking if Intro was seen
 
 
 //JSON Object Array - Store POI Data 
@@ -90,9 +91,10 @@ var data = [{
 var goalData = [{
    
     "name": "End",
+    "goalie": "1",
     "pts": "0",
-    "lat": "49.223449",
-    "lng": "8.784573",
+    "lat": "49.224218",
+    "lng": "8.783995",
     "location": "Goal",
     "distance": "0",
     "txt1": "Ihr erhaltet eine SMS von Chris: ",
@@ -108,14 +110,17 @@ const lngStart = data[0].lng;
 //Number of POIs
 const dataLength = Number(data.length);
 //Distance to StartingPoint in Meters for showing Intro at Start
-const maxDistStart =  14 ; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
+const maxDistStart =   2; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
 
 window.onload = () => {
   //Intervals for geolocation
   setInterval(getLocation, 1000);
   setInterval(distToArr, 1000);
-  setInterval(insertStory, 1000);
+  // setInterval(insertStory, 1000);
   setInterval(hideStory, 1000);
+  //check if pts to get
+  setInterval(getPts, 1000);
+  
 };
 
 
@@ -166,20 +171,20 @@ function getDistance(lat1, lon1, lat2, lon2) {
 //Inserts active txt strings
 function insertStory() {
   // TODO: loop
-  if(pts === 0){
-  console.log("insertStory");
+  
+  // console.log("insertStory");
   question.setAttribute('text', 'value', data[0].question);
   answer1.setAttribute('text', 'value', data[0].answer1);
   answer2.setAttribute('text', 'value', data[0].answer2);
   answer3.setAttribute('text', 'value', data[0].answer3);
-}
+
 }
 
 //Hide Intro txt if next POI is farther than x meters
 //Shows andmHides Elements
 function hideStory() {
-  if (pts < dataLength) {
-    if (distStart <= maxDistStart) { // TODO: for loop with array
+  if (pts <= dataLength ) {
+    if (distStart > maxDistStart && pts === 0) { // TODO: for loop with array
      
       console.log("Einleitung");
       story.setAttribute('visible', true);
@@ -188,8 +193,9 @@ function hideStory() {
       answer1.setAttribute('visible', false);
       answer2.setAttribute('visible', false);
       answer3.setAttribute('visible', false);
+      introVisible = true;
     } else {
-    
+      introVisible = false;
       console.log("Fragen");
       story.setAttribute('visible', false);
       gltfModel.setAttribute('visible', true);
@@ -197,6 +203,7 @@ function hideStory() {
       answer1.setAttribute('visible', true);
       answer2.setAttribute('visible', true);
       answer3.setAttribute('visible', true);
+      insertStory();
     }
   } else {
     goal();
@@ -206,9 +213,20 @@ function hideStory() {
 //Get Pts for finding the points once
 function getPts() {
   var dataPts = Number(data[0].pts);
-  if (dataPts !== 0) {
-    data[0].pts = "0";
-    pts++;
+
+  if(markerFound === true && introVisible === false){
+    console.log(markerFound);
+    console.log("dataPts: " + dataPts);
+    if (dataPts != 0) {
+     data[0].pts = "0";
+      pts++;
+      console.log("pts++");
+    }
+    if (getDistance(lat1, lon1, goalData.lat, goalData.lng) < maxDistStart)
+    {
+      console.log("Am Ziel angekommen!")
+      pts++;
+    }
   }
 }
 
