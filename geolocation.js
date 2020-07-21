@@ -32,7 +32,7 @@ var data = [{
   "lng": "8.785674",
   "location": "Insel",
   "distance": "0",
-  "question": "2    !!!!!!",
+  "question": "NETTO    !!!!!!",
   "answer1": "a) Insel",
   "answer2": "b) Insel",
   "answer3": "c) Insel "
@@ -40,11 +40,11 @@ var data = [{
 }, {
   "name": "Three",
   "pts": "1",
-  "lat": "49.222518",
-  "lng": "8.786994",
+  "lat": "49.49.22179",
+  "lng": "8.787412",
   "location": "333333",
   "distance": "0",
-  "question": "Netto",
+  "question": "Kreisel",
   "answer1": "a) Ecke Etzwiesenstraße",
   "answer2": "b) Ecke Etzwiesenstraße",
   "answer3": "c) Ecke Etzwiesenstraße "
@@ -55,7 +55,7 @@ var data = [{
   "lng": "8.785940",
   "location": "Ecke Brunnenstraße",
   "distance": "0",
-  "question": "Kurs vor FELD",
+  "question": "Auto Schrottplatz",
   "answer1": "a) Ecke Brunnenstraße",
   "answer2": "b) Ecke Brunnenstraße",
   "answer3": "c) Ecke Brunnenstraße "
@@ -93,7 +93,7 @@ var goalData = [{
     "name": "End",
     "goalie": "1",
     "pts": "0",
-    "lat": "49.22096",
+    "lat": "49.220961",
     "lng": "8.778255",
     "location": "Goal",
     "distance": "0",
