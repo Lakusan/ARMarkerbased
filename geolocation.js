@@ -108,7 +108,7 @@ const lngStart = data[0].lng;
 //Number of POIs
 const dataLength = Number(data.length);
 //Distance to StartingPoint in Meters for showing Intro at Start
-const maxDistStart =  5 ; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
+const maxDistStart =  14 ; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
 
 window.onload = () => {
   //Intervals for geolocation
@@ -166,17 +166,18 @@ function getDistance(lat1, lon1, lat2, lon2) {
 //Inserts active txt strings
 function insertStory() {
   // TODO: loop
+  if(pts === 0){
+  console.log("insertStory");
   question.setAttribute('text', 'value', data[0].question);
   answer1.setAttribute('text', 'value', data[0].answer1);
   answer2.setAttribute('text', 'value', data[0].answer2);
   answer3.setAttribute('text', 'value', data[0].answer3);
 }
+}
 
 //Hide Intro txt if next POI is farther than x meters
 //Shows andmHides Elements
 function hideStory() {
-  console.log("pts: " + pts);
-  console.log("dataLength: " + dataLength);
   if (pts < dataLength) {
     if (distStart <= maxDistStart) { // TODO: for loop with array
      
