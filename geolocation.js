@@ -7,6 +7,7 @@ var answer1 = document.getElementById("answer1");
 var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var story = document.getElementById("story");
+var debug = document.getElementById("debug");
 var gltfModel = document.getElementById("gltfModel");
 var distStart; // Calc distance own pos - starting point
 var pts = 0; // Player Pts
@@ -62,7 +63,7 @@ var data = [{
 }, {
   "name": "Five",
   "pts": "1",
-  "lat": "49.220596,",
+  "lat": "49.220596",
   "lng": "8.775602",
   "location": "Obere Brunngenstraße",
   "distance": "0",
@@ -128,20 +129,22 @@ window.onload = () => {
 function distToArr() {
   for (var i in data) {
     var dist = getDistance(lat1, lon1, data[i].lat, data[i].lng);
-    console.log("dist from distToArr: " + dist);
+    //console.log("dist from distToArr: " + dist);
     data[i].distance = dist;
-    console.log("Distance Index 0: " + data[0].distance + data[0].location+ "  NAME: " + data[0].location);
+    //console.log("Distance Index 0: " + data[0].distance + data[0].location+ "  NAME: " + data[0].location);
     // if (data[i].name === "One") {
-     
+    
       distStart = Number(data[0].distance);
-      console.log("DistStart: " + distStart);
-      console.log("Dist to 1: " + data[1].distance + "  NAME: " + data[1].location);
-      //wenn dist immer gesetzt wird, ist der abstand zu Punkt eins immer gegeben
+      //console.log("DistStart: " + distStart);
+      //console.log("Dist to 1: " + data[1].distance + "  NAME: " + data[1].location);
+     
       // console.log(data[i].name + " " + data[i].distance);   
     // }
     
   }
   data.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+var story = document.getElementById("story");
+debug.innerHTML=" Next POI: " + data[0].location + " Distance To POI: " + data[0].distance + " 2nd POI: " + data[1].location + " Distance to 2nd:  " + data[1].distance  ;
 };
 
 //get geolocation of User
@@ -194,7 +197,7 @@ function hideStory() {
     if (distStart > maxDistStart && pts === 0) { // TODO: for loop with array
       
       console.log("Einleitung");
-      console.log("distStart: " + distStart);
+      //console.log("distStart: " + distStart);
       story.setAttribute('visible', true);
       gltfModel.setAttribute('visible', false);
       question.setAttribute('visible', false);

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR-Schnitzeljagt2</title>
+    <title>AR-Schnitzeljagt3</title>
 
     <!-- A-Frame + AR.js -->
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
@@ -15,11 +15,11 @@
 <script>
     //Events
     window.addEventListener('camera-init', (data) => {
-        console.log('camera-init', data);
+       // console.log('camera-init', data);
     })
 
     window.addEventListener('camera-error', (error) => {
-        console.log('camera-error', error);
+        //console.log('camera-error', error);
     })
     var markerFound;
     //Register AREME-Events (Marker)
@@ -29,14 +29,14 @@
 
             marker.addEventListener('markerFound', function () {
                 var markerId = marker.id;
-                console.log('markerFound', markerId);
+                //console.log('markerFound', markerId);
                 markerFound = true;
 
             });
 
             marker.addEventListener('markerLost', function () {
                 var markerId = marker.id;
-                console.log('markerLost', markerId);
+                //console.log('markerLost', markerId);
                 markerFound = false;
 
             });
@@ -45,9 +45,14 @@
 </script>
 
 <body style="margin: 0px; overflow: hidden;">
+    <div id="debug" style="color: greenyellow; width: 300px; height: 300px; background-color: red; position: absolute; top: 00px; left: 0;">
+        
+        </div>
+        
 
     <a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'
         renderer='precision: best;'>
+      
 
         <!-- Load Assets -->
         <a-assets>
