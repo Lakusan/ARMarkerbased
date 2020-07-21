@@ -9,7 +9,7 @@ var answer3 = document.getElementById("answer3");
 var story = document.getElementById("story");
 var gltfModel = document.getElementById("gltfModel");
 var distStart; // Calc distance own pos - starting point
-var pts = 5; // Player Pts
+var pts = 0; // Player Pts
 var introVisible = true; // Bool for checking if Intro was seen
 
 
@@ -17,10 +17,10 @@ var introVisible = true; // Bool for checking if Intro was seen
 var data = [{
   "name": "One",
   "pts": "1",
-  "lat": "43.24754",
-  "lng": "8.785314",
-  "location": "Hauptstraße",
-  "distance": "1",
+  "lat": "49.224645",
+  "lng": "8.785386",
+  "location": "Garten",
+  "distance": "0",
   "question": "Was macht die Erdbeere zu einer ganz besonderen Frucht ?",
   "answer1": "a) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewaechse gehören. ",
   "answer2": "b) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Gemuese, weil die ganz alten Sorten der Erdbeeren, die aus Suedamerika importiert wurden, noch sauer geschmeckt haben. ",
@@ -28,8 +28,8 @@ var data = [{
 }, {
   "name": "Two",
   "pts": "1",
-  "lat": "43.223689",
-  "lng": "8.785839",
+  "lat": "49.223666",
+  "lng": "8.785848",
   "location": "Insel",
   "distance": "0",
   "question": "INSEL!!!!!!",
@@ -66,10 +66,10 @@ var data = [{
   "lng": "8.785160",
   "location": "Obere Brunngenstraße",
   "distance": "0",
-  "question": "Ecke Brunnenstraße",
-  "answer1": "a) Ecke Brunnenstraße",
-  "answer2": "b) Ecke Brunnenstraße",
-  "answer3": "c) Ecke Brunnenstraße "
+  "question": "Obere Brunnenstraße",
+  "answer1": "a) Obere Brunnenstraße",
+  "answer2": "b) Obere Brunnenstraße",
+  "answer3": "c) Obere Brunnenstraße "
 }, {
   "name": "Six",
   "pts": "1",
@@ -93,8 +93,8 @@ var goalData = [{
     "name": "End",
     "goalie": "1",
     "pts": "0",
-    "lat": "49.223689",
-    "lng": "8.785839",
+    "lat": "49.224327",
+    "lng": "8.784679",
     "location": "Goal",
     "distance": "0",
     "txt1": "Ihr erhaltet eine SMS von Chris: ",
@@ -110,7 +110,7 @@ const lngStart = data[0].lng;
 //Number of POIs
 const dataLength = Number(data.length);
 //Distance to StartingPoint in Meters for showing Intro at Start
-const maxDistStart =  40; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
+const maxDistStart =  4; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
 
 window.onload = () => {
   //Intervals for geolocation
@@ -130,11 +130,12 @@ function distToArr() {
     var dist = getDistance(lat1, lon1, data[i].lat, data[i].lng);
     console.log("dist from distToArr: " + dist);
     data[i].distance = dist;
-    console.log("Distance Index 0: " + data[0].distance);
+    console.log("Distance Index 0: " + data[0].distance + data[0].location+ "  NAME: " + data[0].location);
     // if (data[i].name === "One") {
-      console.log("NAME: " + data[i].name );
+     
       distStart = Number(data[0].distance);
       console.log("DistStart: " + distStart);
+      console.log("Dist to 1: " + data[1].distance + "  NAME: " + data[1].location);
       //wenn dist immer gesetzt wird, ist der abstand zu Punkt eins immer gegeben
       // console.log(data[i].name + " " + data[i].distance);   
     // }
