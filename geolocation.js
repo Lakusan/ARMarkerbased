@@ -9,7 +9,7 @@ var answer3 = document.getElementById("answer3");
 var story = document.getElementById("story");
 var gltfModel = document.getElementById("gltfModel");
 var distStart; // Calc distance own pos - starting point
-var pts = 6; // Player Pts
+var pts = 0; // Player Pts
 
 
 //JSON Object Array - Store POI Data 
@@ -108,7 +108,7 @@ const lngStart = data[0].lng;
 //Number of POIs
 const dataLength = Number(data.length);
 //Distance to StartingPoint in Meters for showing Intro at Start
-const maxDistStart =  2 ; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
+const maxDistStart =  5 ; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
 
 window.onload = () => {
   //Intervals for geolocation
