@@ -9,7 +9,7 @@ var answer3 = document.getElementById("answer3");
 var story = document.getElementById("story");
 var gltfModel = document.getElementById("gltfModel");
 var distStart; // Calc distance own pos - starting point
-var pts = 0; // Player Pts
+var pts = 5; // Player Pts
 var introVisible = true; // Bool for checking if Intro was seen
 
 
@@ -17,10 +17,10 @@ var introVisible = true; // Bool for checking if Intro was seen
 var data = [{
   "name": "One",
   "pts": "1",
-  "lat": "49.24754",
+  "lat": "43.24754",
   "lng": "8.785314",
   "location": "Hauptstraße",
-  "distance": "0",
+  "distance": "1",
   "question": "Was macht die Erdbeere zu einer ganz besonderen Frucht ?",
   "answer1": "a) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewaechse gehören. ",
   "answer2": "b) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Gemuese, weil die ganz alten Sorten der Erdbeeren, die aus Suedamerika importiert wurden, noch sauer geschmeckt haben. ",
@@ -28,7 +28,7 @@ var data = [{
 }, {
   "name": "Two",
   "pts": "1",
-  "lat": "49.223689",
+  "lat": "43.223689",
   "lng": "8.785839",
   "location": "Insel",
   "distance": "0",
@@ -76,7 +76,7 @@ var data = [{
   "lat": "49.223449",
   "lng": "8.784573",
   "location": "Ecke Talstraße",
-  "distance": "0",
+  "distance": "1",
   "question": "Ecke Talstraße",
   "answer1": "a) Ecke Talstraße",
   "answer2": "b) Ecke Talstraße",
@@ -93,8 +93,8 @@ var goalData = [{
     "name": "End",
     "goalie": "1",
     "pts": "0",
-    "lat": "49.224218",
-    "lng": "8.783995",
+    "lat": "49.223689",
+    "lng": "8.785839",
     "location": "Goal",
     "distance": "0",
     "txt1": "Ihr erhaltet eine SMS von Chris: ",
@@ -110,7 +110,7 @@ const lngStart = data[0].lng;
 //Number of POIs
 const dataLength = Number(data.length);
 //Distance to StartingPoint in Meters for showing Intro at Start
-const maxDistStart =  20; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
+const maxDistStart =  40; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
 
 window.onload = () => {
   //Intervals for geolocation
@@ -128,11 +128,17 @@ window.onload = () => {
 function distToArr() {
   for (var i in data) {
     var dist = getDistance(lat1, lon1, data[i].lat, data[i].lng);
+    console.log("dist from distToArr: " + dist);
     data[i].distance = dist;
-    if (data[i].name === "One") {
-      distStart = Number(data[i].distance);
+    console.log("Distance Index 0: " + data[0].distance);
+    // if (data[i].name === "One") {
+      console.log("NAME: " + data[i].name );
+      distStart = Number(data[0].distance);
+      console.log("DistStart: " + distStart);
+      //wenn dist immer gesetzt wird, ist der abstand zu Punkt eins immer gegeben
       // console.log(data[i].name + " " + data[i].distance);   
-    }
+    // }
+    
   }
   data.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
 };
@@ -152,7 +158,7 @@ function showPosition(position) {
   lon1 = position.coords.longitude;
 }
 
-//Get distance between user and POI
+//Calc distance between user and POI
 function getDistance(lat1, lon1, lat2, lon2) {
   var R = 6378.137;
   var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
@@ -185,8 +191,9 @@ function insertStory() {
 function hideStory() {
   if (pts <= dataLength ) {
     if (distStart > maxDistStart && pts === 0) { // TODO: for loop with array
-     
+      
       console.log("Einleitung");
+      console.log("distStart: " + distStart);
       story.setAttribute('visible', true);
       gltfModel.setAttribute('visible', false);
       question.setAttribute('visible', false);
@@ -213,7 +220,8 @@ function hideStory() {
 //Get Pts for finding the points once
 function getPts() {
   var dataPts = Number(data[0].pts);
-
+  
+  
   if(markerFound === true && introVisible === false){
     console.log(markerFound);
     console.log("dataPts: " + dataPts);
@@ -222,9 +230,12 @@ function getPts() {
       pts++;
       console.log("pts++");
     }
-    if (getDistance(lat1, lon1, goalData.lat, goalData.lng) < maxDistStart)
+    var distToGoal = getDistance(lat1, lon1, goalData[0].lat, goalData[0].lng);
+    console.log("Distance To Goal"+ distToGoal);
+    if ( distToGoal < maxDistStart)
     {
       console.log("Am Ziel angekommen!")
+      //if goalie not 0
       pts++;
     }
   }
