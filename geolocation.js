@@ -9,7 +9,7 @@ var answer3 = document.getElementById("answer3");
 var story = document.getElementById("story");
 var gltfModel = document.getElementById("gltfModel");
 var distStart; // Calc distance own pos - starting point
-var pts = 6; // Player Pts
+var pts = 4; // Player Pts
 
 
 //JSON Object Array - Store POI Data 
