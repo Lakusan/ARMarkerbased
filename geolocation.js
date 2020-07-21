@@ -17,8 +17,8 @@ var introVisible = true; // Bool for checking if Intro was seen
 var data = [{
   "name": "One",
   "pts": "1",
-  "lat": "49.223711",
-  "lng": "8.785386",
+  "lat": "49.223697",
+  "lng": "8.785821",
   "location": "Insel",
   "distance": "0",
   "question": "INSEL",
@@ -28,59 +28,59 @@ var data = [{
 }, {
   "name": "Two",
   "pts": "1",
-  "lat": "49.222589",
-  "lng": "8.785674",
-  "location": "Insel",
+  "lat": "49.223462",
+  "lng": "8.784587",
+  "location": "tal",
   "distance": "0",
-  "question": "NETTO    !!!!!!",
-  "answer1": "a) Insel",
-  "answer2": "b) Insel",
-  "answer3": "c) Insel "
+  "question": "Talstraße    !!!!!!",
+  "answer1": "a) Tal",
+  "answer2": "b) TAl",
+  "answer3": "c) Tal "
 
 }, {
   "name": "Three",
   "pts": "1",
-  "lat": "49.49.22179",
-  "lng": "8.787412",
+  "lat": "49.223382",
+  "lng": "8.781980",
   "location": "333333",
   "distance": "0",
-  "question": "Kreisel",
-  "answer1": "a) Ecke Etzwiesenstraße",
-  "answer2": "b) Ecke Etzwiesenstraße",
-  "answer3": "c) Ecke Etzwiesenstraße "
+  "question": "Eichenweg",
+  "answer1": "a) Eichenweg",
+  "answer2": "b) Eiche",
+  "answer3": "c) Eiche "
 }, {
   "name": "Four",
   "pts": "1",
-  "lat": "49.221656",
+  "lat": "49.222555",
   "lng": "8.785940",
   "location": "Ecke Brunnenstraße",
   "distance": "0",
-  "question": "Auto Schrottplatz",
-  "answer1": "a) Ecke Brunnenstraße",
-  "answer2": "b) Ecke Brunnenstraße",
-  "answer3": "c) Ecke Brunnenstraße "
+  "question": "Feld",
+  "answer1": "a) Feld",
+  "answer2": "b) Feld",
+  "answer3": "c) Feld"
 }, {
   "name": "Five",
   "pts": "1",
-  "lat": "49.221114",
-  "lng": "8.783233",
+  "lat": "49.220596,",
+  "lng": "8.775602",
   "location": "Obere Brunngenstraße",
   "distance": "0",
-  "question": "FELD 1",
-  "answer1": "a) Obere Brunnenstraße",
-  "answer2": "b) Obere Brunnenstraße",
-  "answer3": "c) Obere Brunnenstraße "
+  "question": "Keuzung vor buckel",
+  "answer1": "a) vor buckel",
+  "answer2": "b) vor buckel",
+  "answer3": "c) vor buckel "
 }, {
   "name": "Six",
   "pts": "1",
-  "lat": "49.218897",
-  "lng": "8.781981",
+  "lat": "49.217775",
+  "lng": "8.777930",
   "location": "Ecke Talstraße",
   "distance": "1",
-  "question": " FELD 2",
-  "answer1": "a) Ecke Talstraße",
-  "answer2": "b) Ecke Talstraße",
-  "answer3": "c) Ecke Talstraße "
+  "question": " STROMMAST",
+  "answer1": "a) Ecke STRIC",
+  "answer2": "b) Ecke STROM",
+  "answer3": "c) Ecke STROM "
 }
 
 ];
@@ -93,8 +93,8 @@ var goalData = [{
     "name": "End",
     "goalie": "1",
     "pts": "0",
-    "lat": "49.220961",
-    "lng": "8.778255",
+    "lat": "49.219643",
+    "lng": "8.784351",
     "location": "Goal",
     "distance": "0",
     "txt1": "Ihr erhaltet eine SMS von Chris: ",
