@@ -108,7 +108,7 @@ const lngStart = data[0].lng;
 //Number of POIs
 const dataLength = Number(data.length);
 //Distance to StartingPoint in Meters for showing Intro at Start
-const maxDistStart =  15 ; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
+const maxDistStart =  2 ; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
 
 window.onload = () => {
   //Intervals for geolocation
@@ -213,6 +213,11 @@ function getPts() {
 //show ending screen if all points captured
 function goal() {
   console.log("Ziel");
+    story.setAttribute('visible', false);
+    question.setAttribute('visible', true);
+      answer1.setAttribute('visible', true);
+      answer2.setAttribute('visible', true);
+      answer3.setAttribute('visible', true);
 
     question.setAttribute('text', 'value', goalData[0].txt1);
     answer1.setAttribute('text', 'value', goalData[0].txt2);
