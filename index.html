@@ -21,7 +21,7 @@
     window.addEventListener('camera-error', (error) => {
         console.log('camera-error', error);
     })
-
+    var markerFound;
     //Register AREME-Events (Marker)
     AFRAME.registerComponent('registerevents', {
         init: function () {
@@ -30,13 +30,14 @@
             marker.addEventListener('markerFound', function () {
                 var markerId = marker.id;
                 console.log('markerFound', markerId);
-                getPts();
+                markerFound = true;
 
             });
 
             marker.addEventListener('markerLost', function () {
                 var markerId = marker.id;
                 console.log('markerLost', markerId);
+                markerFound = false;
 
             });
         }

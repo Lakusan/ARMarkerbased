@@ -17,9 +17,9 @@ var introVisible = true; // Bool for checking if Intro was seen
 var data = [{
   "name": "One",
   "pts": "1",
-  "lat": "49.224124",
-  "lng": "8.786031",
-  "location": "Garten_Pool",
+  "lat": "49.24754",
+  "lng": "8.785314",
+  "location": "Hauptstraße",
   "distance": "0",
   "question": "Was macht die Erdbeere zu einer ganz besonderen Frucht ?",
   "answer1": "a) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewaechse gehören. ",
@@ -110,7 +110,7 @@ const lngStart = data[0].lng;
 //Number of POIs
 const dataLength = Number(data.length);
 //Distance to StartingPoint in Meters for showing Intro at Start
-const maxDistStart =   2; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
+const maxDistStart =  20; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
 
 window.onload = () => {
   //Intervals for geolocation
