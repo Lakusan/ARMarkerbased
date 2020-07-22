@@ -9,9 +9,11 @@ var answer3 = document.getElementById("answer3");
 var story = document.getElementById("story");
 var debug = document.getElementById("debug");
 var gltfModel = document.getElementById("gltfModel");
+var buttons = document.getElementsByClassName("buttons");
 var distStart; // Calc distance own pos - starting point
 var pts = 0; // Player Pts
 var introVisible = true; // Bool for checking if Intro was seen
+var distToGoal;
 
 
 //JSON Object Array - Store POI Data 
@@ -22,8 +24,8 @@ var data = [{
   "lng": "8.785821",
   "location": "Insel",
   "distance": "0",
-  "question": "INSEL",
-  "answer1": "a) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewaechse gehören. ",
+  "question": "Was macht die Erdbeere zu einer ganz besonderen Frucht? ",
+  "answer1": "a) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewaechse gehoeren. ",
   "answer2": "b) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Gemuese, weil die ganz alten Sorten der Erdbeeren, die aus Suedamerika importiert wurden, noch sauer geschmeckt haben. ",
   "answer3": "c) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Nuss, wegen der kleinen gruenen Kerne auf der Beere. ",
   "givenAnswer": "0"
@@ -32,46 +34,50 @@ var data = [{
   "pts": "1",
   "lat": "49.223462",
   "lng": "8.784587",
-  "location": "tal",
+  "location": "Talstraße",
   "distance": "0",
-  "question": "Talstraße    !!!!!!",
-  "answer1": "a) Tal",
-  "answer2": "b) TAl",
-  "answer3": "c) Tal "
+  "question": "In welcher Form waechst die Ananas?",
+  "answer1": "a) Auf palmenarigen Baeumen",
+  "answer2": "b) Als Busch auf dem Feld",
+  "answer3": "c) Unter der Erde",
+  "givenAnswer": "0"
 
 }, {
   "name": "Three",
   "pts": "1",
   "lat": "49.223382",
   "lng": "8.781980",
-  "location": "333333",
+  "location": "Kreuzung Eichen / Birkenweg",
   "distance": "0",
-  "question": "Eichenweg",
-  "answer1": "a) Eichenweg",
-  "answer2": "b) Eiche",
-  "answer3": "c) Eiche "
+  "question": "Welche Teile des Holunders werden haeufig zum Essen verwendet? ",
+  "answer1": "a) Nur die weissen Blueten, die roten Beeren hingegen sind giftig. ",
+  "answer2": "b) Man kann sowohl die Blüten als auch die Beeren essen und verarbeiten. ",
+  "answer3": "c) Man kann die Blueten, die Beeren und auch die jungen Blaetter des Holunderstrauchs als Salat essen.  ",
+  "givenAnswer": "0"
 }, {
   "name": "Four",
   "pts": "1",
   "lat": "49.222533",
   "lng": "8.779198",
-  "location": "Ecke Brunnenstraße",
+  "location": "Ecke Feld",
   "distance": "0",
-  "question": "Feld",
-  "answer1": "a) Feld",
-  "answer2": "b) Feld",
-  "answer3": "c) Feld"
+  "question": "In welchem Jahrzehnt wurde das Lied „Club Tropicana“ von Wham! veroeffentlicht?",
+  "answer1": "a) in den 90ern ",
+  "answer2": "b) in den 2000ern ",
+  "answer3": "c) in den 80ern ",
+  "givenAnswer": "0"
 }, {
   "name": "Five",
   "pts": "1",
   "lat": "49.220596",
   "lng": "8.775602",
-  "location": "Obere Brunngenstraße",
+  "location": "Kreuzung zum Strommast",
   "distance": "0",
-  "question": "Keuzung vor buckel",
-  "answer1": "a) vor buckel",
-  "answer2": "b) vor buckel",
-  "answer3": "c) vor buckel "
+  "question": "Wofuer steht die Abkuerzung cl?",
+  "answer1": "a) Citriliter: Es ist ein besonderes Mass für die Saefte von Zitrusfruechten, die oft in Cocktails verwendet werden. ",
+  "answer2": "b) Centiliter: Es kommt vom lateinischen Wort für Hundert und bedeutet: das Hunderstel eines Liters (10ml)",
+  "answer3": "c) Centimeter pro Liter: Es geht darum, wie hoch die Fluessigkeit im Glas steht.  ",
+  "givenAnswer": "0"
 }, {
   "name": "Six",
   "pts": "1",
@@ -79,10 +85,11 @@ var data = [{
   "lng": "8.777930",
   "location": "Strommast",
   "distance": "1",
-  "question": "Strommast?",
-  "answer1": "a) Strommast",
-  "answer2": "b) Ecke STROM",
-  "answer3": "c) Ecke STROM "
+  "question": "Wo ist der Lebensraum von Pinguinen?",
+  "answer1": "a) Nur in der Arktis, das heißt am Nordpol",
+  "answer2": "b) In den kalten Ozeanen der südlichen Halbkugel.",
+  "answer3": "c) Nur in der Antarktis, das heißt am Südpol. ",
+  "givenAnswer": "0"
 }
 
 ];
@@ -112,7 +119,7 @@ const lngStart = data[0].lng;
 //Number of POIs
 const dataLength = Number(data.length);
 //Distance to StartingPoint in Meters for showing Intro at Start
-const maxDistStart =  30; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
+const maxDistStart =  300; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
 
 window.onload = () => {
   //Intervals for geolocation
@@ -145,7 +152,7 @@ function distToArr() {
   }
   data.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
 var story = document.getElementById("story");
-debug.innerHTML="Active POI: " + data[0].location + "          Distance To POI: " + data[0].distance + "           2nd POI: " + data[1].location + "           Distance to 2nd:  " + data[1].distance  ;
+debug.innerHTML="Active POI: " + data[0].location + "Distance To POI: " + data[0].distance + "2nd POI: " + data[1].location + "Distance to 2nd:  " + data[1].distance +" Distance to Goal: " + distToGoal + " Current Pts: " + pts;
 };
 
 //get geolocation of User
@@ -206,6 +213,10 @@ function hideStory() {
       answer2.setAttribute('visible', false);
       answer3.setAttribute('visible', false);
       introVisible = true;
+      for(var i = 0; i < buttons.length; i++){
+        buttons[i].setAttribute('visible', false);
+       
+    }
     } else {
       introVisible = false;
       console.log("Fragen");
@@ -215,6 +226,10 @@ function hideStory() {
       answer1.setAttribute('visible', true);
       answer2.setAttribute('visible', true);
       answer3.setAttribute('visible', true);
+      for(var i = 0; i < buttons.length; i++){
+        buttons[i].setAttribute('visible', true);
+       
+    }
       insertStory();
     }
   } else {
@@ -235,7 +250,7 @@ function getPts() {
       pts++;
       console.log("pts++");
     }
-    var distToGoal = getDistance(lat1, lon1, goalData[0].lat, goalData[0].lng);
+    distToGoal = getDistance(lat1, lon1, goalData[0].lat, goalData[0].lng);
     console.log("Distance To Goal"+ distToGoal);
     if ( distToGoal < maxDistStart)
     {
@@ -254,6 +269,11 @@ function goal() {
       answer1.setAttribute('visible', true);
       answer2.setAttribute('visible', true);
       answer3.setAttribute('visible', true);
+      for(var i = 0; i < buttons.length; i++){
+        buttons[i].setAttribute('visible', false);
+       
+    }
+     
 
     question.setAttribute('text', 'value', goalData[0].txt1);
     answer1.setAttribute('text', 'value', goalData[0].txt2);

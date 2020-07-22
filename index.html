@@ -30,30 +30,51 @@
 
             marker.addEventListener('markerFound', function () {
                 var markerId = marker.id;
+                 //console.log('markerFound', markerId);
+                 markerFound = true;
                 //Fuse Events for trigger Answer Button
                 var targetEl1 = document.querySelector('#target1');
-                var givenAnswerEl1 = document.querySelector('#givenAnswer1');
-                
-                targetEl1.addEventListener('click', function() {
-                givenAnswerEl1.setAttribute('material', {color: 'red'});
-                });
-
+                var givenAnswerEl1 = document.querySelector('#givenAnswer1');            
                 var targetEl2 = document.querySelector('#target2');
                 var givenAnswerEl2 = document.querySelector('#givenAnswer2');
-
-                targetEl2.addEventListener('click', function() {
-                givenAnswerEl2.setAttribute('material', {color: 'red'});
-                });
-
                 var targetEl3 = document.querySelector('#target3');
                 var givenAnswerEl3 = document.querySelector('#givenAnswer3');
+                var storyText = document.querySelector('#story');
+
+                targetEl1.addEventListener('click', function() {
+                givenAnswerEl1.setAttribute('material', {color: '#BF00FF'});
+                
+                if(!story.visible && pts <= data.length){
+                data[0].givenAnswer = "a";
+                }
+                givenAnswerEl2.setAttribute('material', {color: '#373837'});
+                givenAnswerEl3.setAttribute('material', {color: '#373837'});
+                
+                });
+
+
+                targetEl2.addEventListener('click', function() {
+                givenAnswerEl2.setAttribute('material', {color: '#BF00FF'});
+                if(!story.visible && pts <= data.length){
+                data[0].givenAnswer = "b";
+                }
+                givenAnswerEl1.setAttribute('material', {color: '#373837'});
+                givenAnswerEl3.setAttribute('material', {color: '#373837'});
+
+                });
+
+
 
                 targetEl3.addEventListener('click', function() {
-                givenAnswerEl3.setAttribute('material', {color: 'red'});
+                givenAnswerEl3.setAttribute('material', {color: '#BF00FF'});
+                if(!story.visible && pts <= data.length){
+                data[0].givenAnswer = "c";
+                }
+                givenAnswerEl1.setAttribute('material', {color: '#373837'});
+                givenAnswerEl2.setAttribute('material', {color: '#373837'});
                 });
-                //console.log('markerFound', markerId);
-                markerFound = true;
-
+                console.log("Given Answer on Data0: " + data[0].givenAnswer + " On Record NR: " + data[0].location);
+                console.log(data);
             });
 
             marker.addEventListener('markerLost', function () {
@@ -88,14 +109,14 @@
         
         <a-marker preset='hiro' id='marker-hiro' registerevents>
             <a-plane id='storyPlane' color="#BF00FF" height="2.8" , width="2.1" rotation=" -90 0 0">
-                <a-entity id='story' text="width: 2; value: Hey Girls (guys), hier ist Chris, der Barkeeper vom Club Tropicana…   willkommen in unserem Club, fuehlt euch wie zu Hause, wir werden heute die beste Party aller Zeiten   feiern! 
+                <a-entity id='story' text="width: 2; value: Hey Girls (guys), hier ist Chris, der Barkeeper vom Club Tropicana . . . Willkommen in unserem Club, fuehlt euch wie zu Hause, wir werden heute die beste Party aller Zeiten feiern! 
 
-          Nur leider… ist mir da ein Missgeschick mit meinen Terminen passiert, you know? 
-          Ich brauche eure Hilfe, damit nicht alle Gaeste auf dem Trockenen sitzen… Ich muss heute ganz    dringend auf ein Date mit meiner Freundin, die macht mir sonst die Hoelle heiss... 
+          Nur leider... ist mir da ein Missgeschick mit meinen Terminen passiert, you know? 
+          Ich brauche eure Hilfe, damit nicht alle Gaeste auf dem Trockenen sitzen… Ich muss heute ganz dringend auf ein Date mit meiner Freundin, die macht mir sonst die Hoelle heiss... 
 
-          ich habe naemlich fast ihren Geburtstag vergessen! Ihr uebernehmt doch meine Schicht an der Bar fuer     mich, oder?
+          ich habe naemlich fast ihren Geburtstag vergessen! Ihr uebernehmt doch meine Schicht an der Bar fuer mich, oder?
         
-          Und dann gab es da noch ein kleines Missgeschick… ich habe mich so beeilt als ich heute Morgen   meinen Hund zum Frisoer gebracht habe, dass mir meine Notizen aus meinem Rezeptbuch gefallen sind –   ich habe da naemlich diesen neuen Drink entwickelt - suuuuper lecker - sammelt die doch bitte wieder      ein, und dann kann die Cocktail- Party losgehen! Scannt einfach den Code und folgt den Hinweisen . .     .
+          Und dann gab es da noch ein kleines Missgeschick… ich habe mich so beeilt als ich heute Morgen meinen Hund zum Frisoer gebracht habe, dass mir meine Notizen aus meinem Rezeptbuch gefallen sind – ich habe da naemlich diesen neuen Drink entwickelt - suuuuper lecker - sammelt die doch bitte wieder ein, und dann kann die Cocktail- Party losgehen! Scannt einfach den Code und folgt den Hinweisen . . .
         
           Have fun girls, und vergesst nicht, immer laecheln im Club Tropicana, drinks are free
           fun and sunshine, there's enough for everyone! 
@@ -115,14 +136,29 @@
                 <a-entity id='answer2' text="width: 2; value: Example" rotation="0 0 0" position="0 0 .1" visible="false"></a-entity>
 
                 <a-entity id='answer3' text="width: 2; value: Example" rotation="0 0 0" position="0 -.5 .1" visible="false"></a-entity>
-                <!-- TRIGGER ANSWER BUTTONS -->
-                <a-plane id="target1" material="opacity: 0.0,; transparent: false" position= "-.8 0 .15" width=".5" height="3"></a-plane>
-                <a-plane id="target2" material="opacity: 0.0; transparent:true" position= "0 0 .15" width=".5" height="3"></a-plane>
-                <a-plane id="target3" material="opacity: 0.0; transparent: true" position= ".8 0 .15" width=".5" height="3"></a-plane>
+                <!-- Collision Object to trigger ANSWER BUTTONS -->
+                <a-plane id="target1" class="buttons" visible="false" material="opacity: 0.0,; transparent: false" position= "-.8 0 .15" width=".5" height="3"></a-plane>
+                <a-plane id="target2" class="buttons" visible="false" material="opacity: 0.0; transparent:true" position= "0 0 .15" width=".5" height="3"></a-plane>
+                <a-plane id="target3" class="buttons" visible="false" material="opacity: 0.0; transparent: true" position= ".8 0 .15" width=".5" height="3"></a-plane>
                 <!-- VISUALS FOR ANSWERS -->
-                <a-plane id="givenAnswer1" material="color: green" position=" -.8 -1.8 .1" width=".5" height=".5"></a-plane>
-                <a-plane id="givenAnswer2" material="color: blue" position=" 0 -1.8 .1" width=".5" height=".5"></a-plane>
-                <a-plane id="givenAnswer3" material="color: yellow" position=" .8 -1.8 .1" width=".5" height=".5"></a-plane>
+                <a-plane id="givenAnswer1" class="buttons" visible="false" material="color: #373837" position=" -.8 -1.8 .1" width=".5" height=".5">
+                    <a-entity class= "buttons" visible="false" position="4.83 .04 .1" text="width: 10; value: a">
+
+
+                    </a-entity>
+                </a-plane>
+                <a-plane id="givenAnswer2" class="buttons" visible="false" material="color: #373837" position=" 0 -1.8 .1" width=".5" height=".5">
+                    <a-entity class= "buttons" visible="false" position="4.83 .025 .1" text="width: 10; value: b">
+
+
+                    </a-entity>
+                </a-plane>
+                <a-plane id="givenAnswer3" class="buttons" visible="false" material="color: #373837" position=" .8 -1.8 .1" width=".5" height=".5">
+                    <a-entity class= "buttons" visible="false" position="4.83 .04 .1" text="width: 10; value: c">
+
+
+                    </a-entity>
+                </a-plane>
 
             </a-plane>
             
@@ -130,11 +166,13 @@
 
         <a-entity camera>
             <!-- CURSOR AS RING IN VIEWPORT CENTER -->
-            <a-entity cursor="fuse: true; fuseTimeout: 50"
+            <a-entity cursor="fuse: true; fuseTimeout: 150"
             position="0 -.2 -1"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-            material="color: black; shader: flat">
-    </a-entity>
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.04"
+            material="color: black; shader: flat"
+            animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 1500; from: 1 1 1; to: .8 .8 .8"
+          >
+            </a-entity>
         </a-entity>
 
     </a-scene>
