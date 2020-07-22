@@ -77,10 +77,10 @@ var data = [{
   "pts": "1",
   "lat": "49.217775",
   "lng": "8.777930",
-  "location": "Ecke Talstraße",
+  "location": "Strommast",
   "distance": "1",
-  "question": " STROMMAST",
-  "answer1": "a) Ecke STRIC",
+  "question": "Strommast?",
+  "answer1": "a) Strommast",
   "answer2": "b) Ecke STROM",
   "answer3": "c) Ecke STROM "
 }
