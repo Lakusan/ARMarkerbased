@@ -152,7 +152,7 @@ function distToArr() {
   }
   data.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
 var story = document.getElementById("story");
-debug.innerHTML="Active POI: " + data[0].location + "Distance To POI: " + data[0].distance + "2nd POI: " + data[1].location + "Distance to 2nd:  " + data[1].distance +" Distance to Goal: " + distToGoal + " Current Pts: " + pts;
+// debug.innerHTML="Active POI: " + data[0].location + "Distance To POI: " + data[0].distance + "2nd POI: " + data[1].location + "Distance to 2nd:  " + data[1].distance +" Distance to Goal: " + distToGoal + " Current Pts: " + pts;
 };
 
 //get geolocation of User
