@@ -25,7 +25,8 @@ var data = [{
   "question": "INSEL",
   "answer1": "a) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Blume, weil sie zu der Pflanzenfamilie der Rosengewaechse gehören. ",
   "answer2": "b) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Gemuese, weil die ganz alten Sorten der Erdbeeren, die aus Suedamerika importiert wurden, noch sauer geschmeckt haben. ",
-  "answer3": "c) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Nuss, wegen der kleinen gruenen Kerne auf der Beere. "
+  "answer3": "c) Sie zaehlt eigentlich nicht zu den Fruechten, sondern als Nuss, wegen der kleinen gruenen Kerne auf der Beere. ",
+  "givenAnswer": "0"
 }, {
   "name": "Two",
   "pts": "1",
@@ -52,8 +53,8 @@ var data = [{
 }, {
   "name": "Four",
   "pts": "1",
-  "lat": "49.222555",
-  "lng": "8.785940",
+  "lat": "49.222533",
+  "lng": "8.779198",
   "location": "Ecke Brunnenstraße",
   "distance": "0",
   "question": "Feld",
@@ -144,7 +145,7 @@ function distToArr() {
   }
   data.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
 var story = document.getElementById("story");
-debug.innerHTML=" Next POI: " + data[0].location + " Distance To POI: " + data[0].distance + " 2nd POI: " + data[1].location + " Distance to 2nd:  " + data[1].distance  ;
+debug.innerHTML="Active POI: " + data[0].location + "          Distance To POI: " + data[0].distance + "           2nd POI: " + data[1].location + "           Distance to 2nd:  " + data[1].distance  ;
 };
 
 //get geolocation of User

@@ -16,19 +16,32 @@
     //Events
     window.addEventListener('camera-init', (data) => {
        // console.log('camera-init', data);
-    })
+    });
 
     window.addEventListener('camera-error', (error) => {
         //console.log('camera-error', error);
-    })
+    });
+ 
     var markerFound;
-    //Register AREME-Events (Marker)
+    //Register AFRAME-Events (Marker)
     AFRAME.registerComponent('registerevents', {
         init: function () {
             var marker = this.el;
 
             marker.addEventListener('markerFound', function () {
                 var markerId = marker.id;
+                var targetEl1 = document.querySelector('#target1');
+                targetEl1.addEventListener('click', function() {
+                targetEl1.setAttribute('material', {color: 'red'});
+                });
+                var targetEl2 = document.querySelector('#target2');
+                targetEl2.addEventListener('click', function() {
+                targetEl2.setAttribute('material', {color: 'red'});
+                });
+                var targetEl3 = document.querySelector('#target3');
+                targetEl3.addEventListener('click', function() {
+                targetEl3.setAttribute('material', {color: 'red'});
+                });
                 //console.log('markerFound', markerId);
                 markerFound = true;
 
@@ -44,15 +57,18 @@
     });
 </script>
 
+
 <body style="margin: 0px; overflow: hidden;">
     <div id="debug" style="color: greenyellow; width: 300px; height: 300px; background-color: red; position: absolute; top: 00px; left: 0;">
-        
     </div>
-        
-
+   
+   
+     
     <a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'
         renderer='precision: best;'>
-      
+
+        
+
 
         <!-- Load Assets -->
         <a-assets>
@@ -60,6 +76,7 @@
             <a-asset-item id="cocktail" src="assets/PinaColada(1).gltf"></a-asset-item>
         </a-assets>
         <!-- Intro Text -->
+        
         <a-marker preset='hiro' id='marker-hiro' registerevents>
             <a-plane id='storyPlane' color="#BF00FF" height="2.8" , width="2.1" rotation=" -90 0 0">
                 <a-entity id='story' text="width: 2; value: Hey Girls (guys), hier ist Chris, der Barkeeper vom Club Tropicana…   willkommen in unserem Club, fuehlt euch wie zu Hause, wir werden heute die beste Party aller Zeiten   feiern! 
@@ -76,29 +93,35 @@
           " rotation="0 0 0" position="0 0 .1" visible="true"></a-entity>
             </a-plane>
             <!-- Quest text with Mulitple-Choice-Answers         -->
-            <a-plane id='questPlane' color="#BF00FF" height="2.8" , width="2.1" rotation=" -90 0 0">
-
+            <a-plane id='questPlane' color="#BF00FF" height="2.8"  width="2.1" rotation=" -90 0 0">
+                <!-- MODEL -->
                 <a-entity id='gltfModel' position="0 1.5 .1" scale="1.5 1.5 1.5" gltf-model="#cocktail" modify-materials
                     animation="property: rotation; dur: 10000; to: 0 360 0; loop:true; easing:linear" rotation="0 0 0"
                     visible="true"></a-entity>
+                <!-- QUESTION TEXT -->
+                <a-entity id='question' text="width: 2; value: Example" rotation="0 0 0" position="0 1.2 .1"></a-entity>
+                <!-- ANSWERS TEXT -->
+                <a-entity id='answer1' text="width: 2; value: Example" rotation="0 0 0" position="0 .5 .1" visible="false"></a-entity>
 
-                <a-entity id='question' text="width: 2; value: Example" font="assets/Ranchers/Ranchers-Regular.ttf"
-                    rotation="0 0 0" position="0 1.2 .1"></a-entity>
+                <a-entity id='answer2' text="width: 2; value: Example" rotation="0 0 0" position="0 0 .1" visible="false"></a-entity>
 
-                <a-entity id='answer1' text="width: 2; value: Example" rotation="0 0 0" position="0 .5 .1"
-                    visible="false"></a-entity>
-
-                <a-entity id='answer2' text="width: 2; value: Example" rotation="0 0 0" position="0 0 .1"
-                    visible="false"></a-entity>
-
-                <a-entity id='answer3' text="width: 2; value: Example" rotation="0 0 0" position="0 -.5 .1"
-                    visible="false"></a-entity>
-
+                <a-entity id='answer3' text="width: 2; value: Example" rotation="0 0 0" position="0 -.5 .1" visible="false"></a-entity>
+                <!-- ANSWER BUTTONS -->
+                <a-plane id="target1" material="color: green" position= "-.8 -1.8 .1" width=".5" height=".5"></a-plane>
+                <a-plane id="target2" material="color: blue" position= "0 -1.8 .1" width=".5" height=".5"></a-plane>
+                <a-plane id="target3" material="color: yellow" position= ".8 -1.8 .1" width=".5" height=".5"></a-plane>
             </a-plane>
-
+            
         </a-marker>
 
-        <a-entity camera></a-entity>
+        <a-entity camera>
+            <!-- CURSOR AS RING IN VIEWPORT CENTER -->
+            <a-entity cursor="fuse: true; fuseTimeout: 500"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: black; shader: flat">
+    </a-entity>
+        </a-entity>
 
     </a-scene>
     <!-- Logic Script -->
