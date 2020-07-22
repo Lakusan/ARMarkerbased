@@ -1,3 +1,4 @@
+
 var lat1; //Own Latitdue
 var lat2; //Latidude - Variable for calc distance
 var lon1; //Own Logitude
@@ -14,6 +15,7 @@ var distStart; // Calc distance own pos - starting point
 var pts = 0; // Player Pts
 var introVisible = true; // Bool for checking if Intro was seen
 var distToGoal;
+var serverData = [];
 
 
 //JSON Object Array - Store POI Data 
@@ -119,7 +121,7 @@ const lngStart = data[0].lng;
 //Number of POIs
 const dataLength = Number(data.length);
 //Distance to StartingPoint in Meters for showing Intro at Start
-const maxDistStart =  300; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
+const maxDistStart =  30; //e.g. 10 Meters -> In radius of 10 Meters aroung Starting Point show Intro
 
 window.onload = () => {
   //Intervals for geolocation
@@ -129,6 +131,7 @@ window.onload = () => {
   setInterval(hideStory, 1000);
   //check if pts to get
   setInterval(getPts, 1000);
+
   
 };
 
@@ -266,18 +269,32 @@ function goal() {
   console.log("Ziel");
     story.setAttribute('visible', false);
     question.setAttribute('visible', true);
-      answer1.setAttribute('visible', true);
-      answer2.setAttribute('visible', true);
-      answer3.setAttribute('visible', true);
-      for(var i = 0; i < buttons.length; i++){
-        buttons[i].setAttribute('visible', false);
-       
+    answer1.setAttribute('visible', true);
+    answer2.setAttribute('visible', true);
+    answer3.setAttribute('visible', true);
+    for(var i = 0; i < buttons.length; i++){
+      buttons[i].setAttribute('visible', false);       
     }
      
-
     question.setAttribute('text', 'value', goalData[0].txt1);
     answer1.setAttribute('text', 'value', goalData[0].txt2);
     answer2.setAttribute('text', 'value', goalData[0].txt3);
     answer3.setAttribute('text', 'value', goalData[0].txt4);
+    pushDataToSrv();
 }
 
+function pushDataToSrv(){
+  for (var i in data){
+   serverData.push(data[i].givenAnswer); 
+  }
+
+ const url='https://https://augmentedreality.trendtec.de';
+
+ fetch(url, {
+  method: 'POST',
+  body: serverData,
+}).then((response) => {
+  console.log(response)
+})
+
+}
